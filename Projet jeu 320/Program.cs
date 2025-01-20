@@ -13,13 +13,17 @@ namespace Projet_320_Stone_Sling
             Console.WindowHeight = 40;
             Console.WindowWidth = 150;
 
-            Joueur_1 j1 = new Joueur_1();
-            j1.Afficher();  // Affiche le personnage
+            // Création des joueurs
+            Joueur j1 = new Joueur { Color = ConsoleColor.Blue }; //Joueur 1 en bleu
+            Joueur j2 = new Joueur { Color = ConsoleColor.Red }; //Joueur 2 en rouge
 
-            Joueur_2 j2 = new Joueur_2();
-            j2.Afficher();  // Affiche le personnage
+            // Coordonnées pour affichage joueurs
+            j1.Afficher(10, 5);
+            j2.Afficher(30, 5);
 
+            Console.ResetColor();
             Console.ReadLine();
         }
+
     }
 }

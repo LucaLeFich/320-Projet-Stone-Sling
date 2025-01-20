@@ -1,33 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projet_320_Stone_Sling
 {
-    internal class Joueur_1
+    internal class Joueur
     {
-        public string[] Player1 =
-        {
-            @" o",
-            @"/░\",
-            @"/ \",
-        };
+        public string[] Representation { get; set; }
+        public ConsoleColor Color { get; set; }
 
-        private int positionX;
-        private int positionY;
-
-        public void Draw()
+        // Constructeur par défaut (représentation générique)
+        public Joueur()
         {
-            string[] view = Player1;
-            for (int i = 0; i < view.Length; i++)
+            Representation = new string[]
             {
-                Console.SetCursorPosition(positionX, positionY + i);
-                Console.WriteLine(view[i]);
-            }
+                @" o",
+                @"/░\",
+                @"/ \"
+            };
+            Color = ConsoleColor.White; //couleur par défaut
         }
 
+        public void Afficher(int x, int y)
+        {
+            Console.ForegroundColor = Color;
+
+            for (int i = 0; i < Representation.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                Console.Write(Representation[i]);
+            }
+            Console.ResetColor(); // Réinitialise la couleur par défaut
+        }
     }
 }

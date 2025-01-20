@@ -46,7 +46,6 @@
     <Compile Include="TourJ2.cs" />
     <Compile Include="TourJ1.cs" />
     <Compile Include="Joueur_1.cs" />
-    <Compile Include="Joueur_2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
