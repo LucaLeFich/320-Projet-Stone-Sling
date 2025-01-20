@@ -43,8 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TourJ2.cs" />
-    <Compile Include="TourJ1.cs" />
+    <Compile Include="Tours.cs" />
     <Compile Include="Joueur_1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
