@@ -19,7 +19,15 @@ namespace Projet_320_Stone_Sling
         private int positionX;
         private int positionY;
 
-        
+        public void Draw()
+        {
+            string[] view = Player1;
+            for (int i = 0; i < view.Length; i++)
+            {
+                Console.SetCursorPosition(positionX, positionY + i);
+                Console.WriteLine(view[i]);
+            }
         }
+
     }
 }
