@@ -10,13 +10,13 @@ namespace Projet_320_Stone_Sling
 {
     internal class Joueur
     {
-        public string[] Representation { get; set; }
+        public string[] _representation { get; set; }
         public ConsoleColor Color { get; set; }
 
         // Constructeur par défaut (représentation générique)
         public Joueur()
         {
-            Representation = new string[]
+            _representation = new string[]
             {
                 @" o",
                 @"/░\",
@@ -29,10 +29,10 @@ namespace Projet_320_Stone_Sling
         {
             Console.ForegroundColor = Color;
 
-            for (int i = 0; i < Representation.Length; i++)
+            for (int i = 0; i < _representation.Length; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                Console.Write(Representation[i]);
+                Console.Write(_representation[i]);
             }
             Console.ResetColor(); // Réinitialise la couleur par défaut
         }
