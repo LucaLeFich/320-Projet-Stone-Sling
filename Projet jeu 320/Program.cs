@@ -15,16 +15,16 @@ namespace Projet_320_Stone_Sling
             Console.WindowWidth = 150;
 
             // Création des joueurs
-            Joueur j1 = new Joueur { Color = ConsoleColor.Blue }; //Joueur 1 en bleu
-            Joueur j2 = new Joueur { Color = ConsoleColor.Red }; //Joueur 2 en rouge
-            Tours t1 = new Tours();
-            Tours t2 = new Tours();
+            Joueur joueur1 = new Joueur { Color = ConsoleColor.Blue }; //Joueur 1 en bleu
+            Joueur joueur2 = new Joueur { Color = ConsoleColor.Red }; //Joueur 2 en rouge
+            Tours tour1 = new Tours();
+            Tours tour2 = new Tours();
 
             // Coordonnées pour affichage joueurs
-            j1.Afficher(10, 27);
-            j2.Afficher(108, 27);
-            t1.Afficher(20, 23);
-            t2.Afficher(98, 23);
+            joueur1.Afficher(10, 27);
+            joueur2.Afficher(108, 27);
+            tour1.Afficher(20, 23);
+            tour2.Afficher(98, 23);
             
 
             Console.ReadLine();
