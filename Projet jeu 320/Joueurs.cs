@@ -11,11 +11,19 @@ namespace Projet_320_Stone_Sling
     internal class Joueur
     {
         public string[] _representation { get; set; }
+
+        public int _number { get; set; }
+
+        public int _score { get; set; }
+
         public ConsoleColor Color { get; set; }
 
         // Constructeur par défaut (représentation générique)
-        public Joueur()
+        public Joueur(int number)
         {
+            _number = number;
+            _score = _score;
+
             _representation = new string[]
             {
                 @" o",
@@ -23,6 +31,7 @@ namespace Projet_320_Stone_Sling
                 @"/ \"
             };
             Color = ConsoleColor.White; //couleur par défaut
+            number = 0; //Nom par défaut
         }
 
         public void Afficher(int x, int y)
