@@ -16,6 +16,9 @@ namespace Projet_320_Stone_Sling
 
         public int _score { get; set; }
 
+        public int _hpValue { get; set; }
+        public string _hp { get; set; }
+
         public ConsoleColor Color { get; set; }
 
         // Constructeur par défaut (représentation générique)
@@ -23,6 +26,8 @@ namespace Projet_320_Stone_Sling
         {
             _number = number;
             _score = _score;
+            _hpValue = _hpValue;
+            _hp = _hp;
 
             _representation = new string[]
             {
