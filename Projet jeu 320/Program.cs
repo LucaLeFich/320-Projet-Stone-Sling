@@ -25,8 +25,8 @@ namespace Projet_320_Stone_Sling
             Tours tour2 = new Tours();
             Projectile projectile = new Projectile();
             AimPoints aimPoints = new AimPoints();
-            HUD hudj1 = new HUD(joueur1._number, joueur1._score = 0, joueur1._hp = "♥ ♥ ♥", joueur1._hpValue = 3) { Color = ConsoleColor.Cyan };
-            HUD hudj2 = new HUD(joueur2._number, joueur2._score = 0, joueur2._hp = "♥ ♥ ♥", joueur2._hpValue = 3) { Color = ConsoleColor.Red };
+            HUD hudj1 = new HUD(joueur1.Number, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3) { Color = ConsoleColor.Cyan };
+            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3) { Color = ConsoleColor.Red };
 
             // Coordonnées pour affichage Objets
             joueur1.Afficher(10, 27);
@@ -40,31 +40,34 @@ namespace Projet_320_Stone_Sling
 
             while (true)
             {
-               var key = Console.ReadKey();
-                if (key.Key == ConsoleKey.LeftArrow)
+                if (Console.KeyAvailable)
                 {
-                    joueur1._score++;
-                    hudj1 = new HUD(joueur1._number, joueur1._score, joueur1._hp = "♥ ♥ ♥", joueur1._hpValue = 3) { Color = ConsoleColor.Cyan };
-                    hudj1.Afficher(10, 2);
-                }
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.LeftArrow)
+                    {
+                        joueur1.Score++;
+                        hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP, joueur1.HpValue) { Color = ConsoleColor.Cyan };
+                        hudj1.Afficher(10, 2);
+                    }
+                   
+                    else if (key.Key == ConsoleKey.RightArrow)
+                    {
+                        joueur2.Score++;
+                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue) { Color = ConsoleColor.Red };
+                        hudj2.Afficher(115, 2);
+                    }
 
-                var key2 = Console.ReadKey();
-                if (key2.Key == ConsoleKey.RightArrow)
-                {
-                    joueur2._score++;
-                    hudj2 = new HUD(joueur2._number, joueur2._score, joueur2._hp = "♥ ♥ ♥", joueur2._hpValue = 3) { Color = ConsoleColor.Red };
-                    hudj2.Afficher(115, 2);
-                }
-
-                var key3 = Console.ReadKey();
-                if (key3.Key == ConsoleKey.UpArrow)
-                {
-                    joueur2._hpValue--;
-                    hudj2 = new HUD(joueur2._number, joueur2._score, joueur2._hp = "♥ ♥ ♥", joueur2._hpValue = 3) { Color = ConsoleColor.Red };
-                    hudj2.Afficher(115, 2);
+                    else if (key.Key == ConsoleKey.UpArrow)
+                    {
+                        joueur2.HpValue--;
+                        hudj2.UpdateHP();
+                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue) { Color = ConsoleColor.Red };
+                        hudj2.UpdateHP();
+                        hudj2.Afficher(115, 2);
+                        
+                    }
                 }
             }           
-
             Console.ReadLine();
         }
     }

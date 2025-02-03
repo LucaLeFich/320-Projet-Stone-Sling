@@ -8,12 +8,12 @@ namespace Projet_320_Stone_Sling
 {
     internal class Tours
     {
-        public string[] _tours {  get; set; }
+        public string[] Tour {  get; set; }
         public ConsoleColor Color { get; set; }
 
         public Tours() 
         {
-            _tours = new string[]
+            Tour = new string[]
             {
                 @"████",
                 @"████",
@@ -31,10 +31,10 @@ namespace Projet_320_Stone_Sling
         {
             Console.ForegroundColor = Color;
 
-            for (int i = 0; i < _tours.Length; i++)
+            for (int i = 0; i < Tour.Length; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                Console.Write(_tours[i]);
+                Console.Write(Tour[i]);
             }
             Console.ResetColor(); // Réinitialise la couleur par défaut
         }

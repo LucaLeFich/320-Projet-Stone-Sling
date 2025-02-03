@@ -8,17 +8,17 @@ namespace Projet_jeu_320
 {
     internal class Projectile
     {
-        public char _projectile {  get; set; }
+        public char projectile {  get; set; }
 
         public Projectile()
         {
-            _projectile = '●';
+            projectile = '●';
         }
 
         public void Afficher(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-            Console.Write(_projectile);
+            Console.Write(projectile);
         }
     }
 }

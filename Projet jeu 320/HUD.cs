@@ -10,56 +10,30 @@ namespace Projet_jeu_320
 {
     internal class HUD
     {
-        public string[] _HUD {  get; set; }
+        public string[] Hud {  get; set; }
 
-        public int _numeroJoueur { get; set; }
+        public int NumeroJoueur { get; set; }
 
-        public int _score { get; set; }
+        public int Score { get; set; }
 
-        public int _hpValue {  get; set; } 
+        public int HpValue {  get; set; } 
 
-        public string _hp {  get; set; }
+        public string HP {  get; set; }
 
         public ConsoleColor Color { get; set; }
 
         public HUD(int numeroJoueur, int score, string hp, int hpValue)
         {
-            _numeroJoueur = numeroJoueur;
-            _score = score;
-            _hp = hp;
-            _hpValue = hpValue;
+            NumeroJoueur = numeroJoueur;
+            Score = score;
+            HP = hp;
+            HpValue = hpValue;
 
-            if (hpValue == 3)
-            {
-                hp = "♥ ♥ ♥";
-            }
-            else
-            {
-                if (hpValue == 2)
-                {
-                    hp = "♥ ♥";
-                }
-                else
-                {
-                    if (hpValue == 1)
-                    {
-                        hp = "♥";
-                    }
-                    else
-                    {
-                        if (hpValue == 0)
-                        {
-                            hp = "";
-                        }
-                    }
-                }
-            }
+            string scoreFormate = Score.ToString("D3");
 
-            string scoreFormate = _score.ToString("D3");
-
-            _HUD = new string[]
+            Hud = new string[]
             {
-                "╔═════════════════════╗",
+                "╔═════════◦-◦═════════╗",
                 $"║ Joueur {numeroJoueur}            ║",
                 $"║ HP: {hp}           ║",
                 $"║ Score: {scoreFormate}          ║",
@@ -68,17 +42,39 @@ namespace Projet_jeu_320
                 "║ ███████████████████ ║",
                 "╚═════════════════════╝"
             };
+            Console.WriteLine(HpValue);
             Color = ConsoleColor.White; //couleur par défaut
+        }
+
+        public string UpdateHP()
+        {
+            if (HpValue == 3)
+            {
+                HP = "♥ ♥ ♥";
+            }
+            else if (HpValue == 2)
+            {
+                HP = "♥ ♥";
+            }
+            else if ( HpValue == 1)
+            {
+                HP = "♥";
+            }
+            else if( HpValue == 0)
+            {
+                HP = "";
+            }
+            return HP;
         }
 
         public void Afficher(int x, int y)
         {
             Console.ForegroundColor = Color;
 
-            for (int i = 0; i < _HUD.Length; i++)
+            for (int i = 0; i < Hud.Length; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                Console.Write(_HUD[i]);
+                Console.Write(Hud[i]);
             }
         }
 
