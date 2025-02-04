@@ -35,14 +35,13 @@ namespace Projet_jeu_320
             {
                 "╔═════════◦-◦═════════╗",
                 $"║ Joueur {numeroJoueur}            ║",
-                $"║ HP: {hp}           ║",
+                $"║ HP: {hp} {hpValue}          ║",
                 $"║ Score: {scoreFormate}          ║",
                 "╚═════════════════════╝",
                 "╔═════════════════════╗",
                 "║ ███████████████████ ║",
                 "╚═════════════════════╝"
             };
-            Console.WriteLine(HpValue);
             Color = ConsoleColor.White; //couleur par défaut
         }
 
@@ -52,18 +51,20 @@ namespace Projet_jeu_320
             {
                 HP = "♥ ♥ ♥";
             }
-            else if (HpValue == 2)
+            if (HpValue == 2)
             {
-                HP = "♥ ♥";
+                HP = "♥ ♥  ";
             }
-            else if ( HpValue == 1)
+            if ( HpValue == 1)
             {
-                HP = "♥";
+                HP = "♥   ";
             }
-            else if( HpValue == 0)
+            if( HpValue == 0)
             {
-                HP = "";
+                HP = "    ";
             }
+            Console.WriteLine("HP Updated: " + HP); // Ajout pour voir la mise à jour de HP
+
             return HP;
         }
 

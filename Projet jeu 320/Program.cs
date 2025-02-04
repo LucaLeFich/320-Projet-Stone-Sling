@@ -26,7 +26,7 @@ namespace Projet_320_Stone_Sling
             Projectile projectile = new Projectile();
             AimPoints aimPoints = new AimPoints();
             HUD hudj1 = new HUD(joueur1.Number, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3) { Color = ConsoleColor.Cyan };
-            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3) { Color = ConsoleColor.Red };
+            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP, joueur2.HpValue = 3) { Color = ConsoleColor.Red };
 
             // Coordonnées pour affichage Objets
             joueur1.Afficher(10, 27);
@@ -35,6 +35,7 @@ namespace Projet_320_Stone_Sling
             tour2.Afficher(125, 22);
             projectile.Afficher(20, 20);
             aimPoints.Afficher(12, 23);
+            Console.Clear();
             hudj1.Afficher(10, 2);
             hudj2.Afficher(115, 2);
 
@@ -57,11 +58,22 @@ namespace Projet_320_Stone_Sling
                         hudj2.Afficher(115, 2);
                     }
 
-                    else if (key.Key == ConsoleKey.UpArrow)
+                    else if (key.Key == ConsoleKey.DownArrow && joueur1.HpValue > 0)
+                    {
+                        Console.WriteLine("Before Update: " + joueur1.HpValue); // Affiche les HP avant la mise à jour
+                        joueur1.HpValue--;
+                        
+                        hudj1.UpdateHP();
+                        Console.WriteLine("After Update: " + joueur1.HpValue);  // Affiche les HP après la mise à jour
+                        //hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP, joueur1.HpValue) { Color = ConsoleColor.Cyan };
+                        hudj1.Afficher(10, 2);
+
+                    }
+
+                    else if (key.Key == ConsoleKey.UpArrow && joueur2.HpValue > 0)
                     {
                         joueur2.HpValue--;
-                        hudj2.UpdateHP();
-                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue) { Color = ConsoleColor.Red };
+                        //hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue) { Color = ConsoleColor.Red };
                         hudj2.UpdateHP();
                         hudj2.Afficher(115, 2);
                         
