@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Projet_320_Stone_Sling
 {
@@ -11,6 +12,8 @@ namespace Projet_320_Stone_Sling
     {
         static void Main()
         {
+            Console.CursorVisible = false;
+
             //Pour afficher "●"
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -26,7 +29,7 @@ namespace Projet_320_Stone_Sling
             Projectile projectile = new Projectile();
             AimPoints aimPoints = new AimPoints();
             HUD hudj1 = new HUD(joueur1.Number, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3) { Color = ConsoleColor.Cyan };
-            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP, joueur2.HpValue = 3) { Color = ConsoleColor.Red };
+            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3) { Color = ConsoleColor.Red };
 
             // Coordonnées pour affichage Objets
             joueur1.Afficher(10, 27);
@@ -34,10 +37,30 @@ namespace Projet_320_Stone_Sling
             tour1.Afficher(20, 22);
             tour2.Afficher(125, 22);
             projectile.Afficher(20, 20);
-            aimPoints.Afficher(12, 23);
-            Console.Clear();
+            hudj1.UpdateBar(0);
             hudj1.Afficher(10, 2);
             hudj2.Afficher(115, 2);
+
+            bool isAiming = true;
+            int aimIndex = 0;
+
+            while (isAiming)
+            {
+                aimPoints.Afficher(12, 23, aimIndex);
+                Thread.Sleep(500);
+                aimPoints.Clear();
+                aimIndex = (aimIndex + 1) % aimPoints.aimPoints.Length;
+
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Spacebar)
+                    {
+                        aimPoints.Afficher(12, 23, aimIndex);
+                        isAiming = false;
+                    }
+                }
+            }
 
             while (true)
             {
@@ -50,7 +73,7 @@ namespace Projet_320_Stone_Sling
                         hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP, joueur1.HpValue) { Color = ConsoleColor.Cyan };
                         hudj1.Afficher(10, 2);
                     }
-                   
+
                     else if (key.Key == ConsoleKey.RightArrow)
                     {
                         joueur2.Score++;
@@ -60,12 +83,8 @@ namespace Projet_320_Stone_Sling
 
                     else if (key.Key == ConsoleKey.DownArrow && joueur1.HpValue > 0)
                     {
-                        Console.WriteLine("Before Update: " + joueur1.HpValue); // Affiche les HP avant la mise à jour
                         joueur1.HpValue--;
-                        
-                        hudj1.UpdateHP();
-                        Console.WriteLine("After Update: " + joueur1.HpValue);  // Affiche les HP après la mise à jour
-                        //hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP, joueur1.HpValue) { Color = ConsoleColor.Cyan };
+                        hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP = hudj1.UpdateHP(joueur1.HpValue), joueur1.HpValue) { Color = ConsoleColor.Cyan };
                         hudj1.Afficher(10, 2);
 
                     }
@@ -73,14 +92,12 @@ namespace Projet_320_Stone_Sling
                     else if (key.Key == ConsoleKey.UpArrow && joueur2.HpValue > 0)
                     {
                         joueur2.HpValue--;
-                        //hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue) { Color = ConsoleColor.Red };
-                        hudj2.UpdateHP();
+                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP = hudj2.UpdateHP(joueur2.HpValue), joueur2.HpValue) { Color = ConsoleColor.Red };
                         hudj2.Afficher(115, 2);
-                        
+
                     }
                 }
-            }           
-            Console.ReadLine();
+            }
         }
     }
 }

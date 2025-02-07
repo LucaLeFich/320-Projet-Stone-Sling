@@ -10,15 +10,19 @@ namespace Projet_jeu_320
 {
     internal class HUD
     {
-        public string[] Hud {  get; set; }
+        public string[] Hud { get; set; }
 
         public int NumeroJoueur { get; set; }
 
         public int Score { get; set; }
 
-        public int HpValue {  get; set; } 
+        public int HpValue { get; set; }
 
-        public string HP {  get; set; }
+        public string HP { get; set; }
+
+        public string StrenghtBar {  get; set; }
+
+        public int StrenghtValue { get; set; }
 
         public ConsoleColor Color { get; set; }
 
@@ -33,39 +37,41 @@ namespace Projet_jeu_320
 
             Hud = new string[]
             {
-                "╔═════════◦-◦═════════╗",
-                $"║ Joueur {numeroJoueur}            ║",
-                $"║ HP: {hp} {hpValue}          ║",
-                $"║ Score: {scoreFormate}          ║",
-                "╚═════════════════════╝",
-                "╔═════════════════════╗",
-                "║ ███████████████████ ║",
-                "╚═════════════════════╝"
+                "╔══════════════════════╗",
+                $"║ Joueur {numeroJoueur}             ║",
+                $"║ HP: {hp}            ║",
+                $"║ Score: {scoreFormate}           ║",
+                "╚══════════════════════╝",
+                "╔══════════════════════╗",
+               $"║ {StrenghtBar} ║",
+                "╚══════════════════════╝"
             };
             Color = ConsoleColor.White; //couleur par défaut
         }
-
-        public string UpdateHP()
+        public string UpdateHP(int hpValue)
         {
-            if (HpValue == 3)
+            if (hpValue == 2)
             {
-                HP = "♥ ♥ ♥";
+                HP = "♥ ♥ x";
             }
-            if (HpValue == 2)
+            if (hpValue == 1)
             {
-                HP = "♥ ♥  ";
+                HP = "♥ x x";
             }
-            if ( HpValue == 1)
+            if (hpValue == 0)
             {
-                HP = "♥   ";
+                HP = "x x x";
             }
-            if( HpValue == 0)
-            {
-                HP = "    ";
-            }
-            Console.WriteLine("HP Updated: " + HP); // Ajout pour voir la mise à jour de HP
-
             return HP;
+        }
+
+        public string UpdateBar(int strenghtValue)
+        {
+            if(strenghtValue == 0)
+            {
+                StrenghtBar = "█                   ";
+            }
+            return StrenghtBar;
         }
 
         public void Afficher(int x, int y)
