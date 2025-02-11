@@ -18,7 +18,7 @@ namespace Projet_jeu_320
         public void Afficher(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-            Console.Write(projectile);
+            
         }
     }
 }
