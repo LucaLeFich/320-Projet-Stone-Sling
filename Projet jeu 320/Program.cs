@@ -116,7 +116,7 @@ namespace Projet_320_Stone_Sling
             float blurFactor = (float)(random.NextDouble() * 10.0 - 5.0); // Zone floue entre -5 et +5 degrés
 
             // Convertir le temps écoulé en angle
-            float baseAngle = 90 - ((float)(elapsedMilliseconds % 2000) / 2000 * 90); // Ajuster le temps écoulé pour un cycle complet de 2400ms
+            float baseAngle = 90 - ((float)(elapsedMilliseconds % 1600) / 1600 * 90); // Ajuster le temps écoulé pour un cycle complet de 2400ms
             float angle = baseAngle + blurFactor;
             return Clamp(angle, 0f, 90f); // Contraindre l'angle entre 0 et 90 degrés
         }
