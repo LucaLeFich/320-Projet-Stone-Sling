@@ -57,6 +57,11 @@ namespace Projet_320_Stone_Sling
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+
                     if (key.Key == ConsoleKey.Spacebar)
                     {
                         isAiming = false;
@@ -78,6 +83,11 @@ namespace Projet_320_Stone_Sling
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey(true);
+                    if ( key.Key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+
                     if (key.Key == ConsoleKey.LeftArrow)
                     {
                         joueur1.Score++;
