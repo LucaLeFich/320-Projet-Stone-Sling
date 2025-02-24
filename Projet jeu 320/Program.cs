@@ -42,6 +42,7 @@ namespace Projet_320_Stone_Sling
             hudj1.Afficher(10, 2);
             hudj2.Afficher(115, 2);
 
+            bool selectingStrenght = true;
             bool isAiming = true;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -70,13 +71,61 @@ namespace Projet_320_Stone_Sling
                         // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
                         //float angle = CalculerAngle(stopwatch.ElapsedMilliseconds);
                         Console.WriteLine($"Angle enregistré: {angle} degrés");
-
-                        isAiming=true;
                     }
                 }
                 else
                 {
                     aimPoints.Clear();
+                }
+            }
+
+            // Logic for the strength bar
+            int barLength = 21;
+            bool increasing = true;
+            int strength = 0;
+
+            while (selectingStrenght)
+            {
+                Console.SetCursorPosition(0, 1);
+                Console.Write("Force: ");
+                Console.Write(new string('█', strength));
+                Console.Write(new string(' ', barLength - strength));
+
+                if (increasing)
+                {
+                    strength++;
+                    if (strength == barLength)
+                    {
+                        increasing = false;
+                    }
+                }
+                else
+                {
+                    strength--;
+                    if (strength == 0)
+                    {
+                        increasing = true;
+                    }
+                }
+
+                Thread.Sleep(100);
+
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+
+                    if (key.Key == ConsoleKey.Spacebar)
+                    {
+                        isAiming = false;
+                        stopwatch.Stop();
+
+                        // Enregistrer la force basée sur la barre
+                        Console.WriteLine($"\nForce enregistrée: {strength}");
+                    }
                 }
             }
 
@@ -132,7 +181,6 @@ namespace Projet_320_Stone_Sling
             float angle = baseAngle + blurFactor;
             return Clamp(angle, 0f, 90f); // Contraindre l'angle entre 0 et 90 degrés
         }
-
 
         static float Clamp(float value, float min, float max)
         {

@@ -43,7 +43,7 @@ namespace Projet_jeu_320
                 $"║ Score: {scoreFormate}           ║",
                 "╚══════════════════════╝",
                 "╔══════════════════════╗",
-               $"║ {StrenghtBar} ║",
+               $"║ {strenght} ║",
                 "╚══════════════════════╝"
             };
             Color = ConsoleColor.White; //couleur par défaut
@@ -65,13 +65,33 @@ namespace Projet_jeu_320
             return HP;
         }
 
-        public string UpdateBar(int strenghtValue)
+        public string UpdateBar()
         {
-            if(strenghtValue == 0)
+            int barLength = 21;
+            bool increasing = true;
+            int strength = 0;
+
+            Console.SetCursorPosition(0, 1);
+            Console.Write("Force: ");
+            Console.Write(new string('█', strength));
+            Console.Write(new string(' ', barLength - strength));
+
+            if (increasing)
             {
-                StrenghtBar = "█                   ";
+                strength++;
+                if (strength == barLength)
+                {
+                    increasing = false;
+                }
             }
-            return StrenghtBar;
+            else
+            {
+                strength--;
+                if (strength == 0)
+                {
+                    increasing = true;
+                }
+            }
         }
 
         public void Afficher(int x, int y)
