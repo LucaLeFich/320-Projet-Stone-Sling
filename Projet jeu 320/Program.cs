@@ -70,8 +70,6 @@ namespace Projet_320_Stone_Sling
                         // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
                         //float angle = CalculerAngle(stopwatch.ElapsedMilliseconds);
                         Console.WriteLine($"Angle enregistré: {angle} degrés");
-
-                        isAiming=true;
                     }
                 }
                 else
