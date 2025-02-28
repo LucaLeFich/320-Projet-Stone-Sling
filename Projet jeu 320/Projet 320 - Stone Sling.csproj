@@ -46,6 +46,7 @@
     <Compile Include="AimPoints.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Projectile.cs" />
+    <Compile Include="StrenghtBar.cs" />
     <Compile Include="Tours.cs" />
     <Compile Include="Joueurs.cs" />
     <Compile Include="Program.cs" />

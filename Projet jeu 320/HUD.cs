@@ -43,7 +43,7 @@ namespace Projet_jeu_320
                 $"║ Score: {scoreFormate}           ║",
                 "╚══════════════════════╝",
                 "╔══════════════════════╗",
-               $"║ {StrenghtBar} ║",
+               $"║ {StrenghtBar}        ║",
                 "╚══════════════════════╝"
             };
             Color = ConsoleColor.White; //couleur par défaut
