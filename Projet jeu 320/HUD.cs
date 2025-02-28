@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projet_jeu_320
@@ -20,11 +21,11 @@ namespace Projet_jeu_320
 
         public string HP { get; set; }
 
-        public string StrenghtBar {  get; set; }
-
-        public int StrenghtValue { get; set; }
-
         public ConsoleColor Color { get; set; }
+
+        private const int barLength = 20;
+        private bool charging = true;
+        private int chargeLevel = 0;
 
         public HUD(int numeroJoueur, int score, string hp, int hpValue)
         {
@@ -43,7 +44,7 @@ namespace Projet_jeu_320
                 $"║ Score: {scoreFormate}           ║",
                 "╚══════════════════════╝",
                 "╔══════════════════════╗",
-               $"║ {StrenghtBar}        ║",
+               $"║                      ║",
                 "╚══════════════════════╝"
             };
             Color = ConsoleColor.White; //couleur par défaut
@@ -63,15 +64,6 @@ namespace Projet_jeu_320
                 HP = "x x x";
             }
             return HP;
-        }
-
-        public string UpdateBar(int strenghtValue)
-        {
-            if(strenghtValue == 0)
-            {
-                StrenghtBar = "█                   ";
-            }
-            return StrenghtBar;
         }
 
         public void Afficher(int x, int y)

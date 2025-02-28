@@ -38,7 +38,7 @@ namespace Projet_320_Stone_Sling
             tour1.Afficher(20, 22);
             tour2.Afficher(125, 22);
             projectile.Afficher(20, 20);
-            hudj1.UpdateBar(0);
+            //hudj1.UpdateBar(0);
             hudj1.Afficher(10, 2);
             hudj2.Afficher(115, 2);
 
@@ -77,6 +77,10 @@ namespace Projet_320_Stone_Sling
                     aimPoints.Clear();
                 }
             }
+
+            StrengthBar strengthBar = new StrengthBar();
+            strengthBar.Start();
+
 
             while (true)
             {

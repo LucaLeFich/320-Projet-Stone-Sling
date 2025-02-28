@@ -1,13 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
-namespace Projet_jeu_320
+public class StrengthBar
 {
-    internal class StrenghtBar
+    private const int barLength = 20;
+    private bool charging = true;
+    private int chargeLevel = 1;
+    private bool isRunning = true;
+
+    public void Start()
     {
-        public string Bar {  get; set; }
+        Thread inputThread = new Thread(CheckInput);
+        inputThread.Start();
+
+        while (isRunning)
+        {
+            if (charging)
+            {
+                chargeLevel++;
+                if (chargeLevel >= barLength)
+                {
+                    charging = false;
+                }
+            }
+            else
+            {
+                chargeLevel--;
+                if (chargeLevel <= 1)
+                {
+                    charging = true;
+                }
+            }
+
+            DrawBar(chargeLevel, barLength);
+            Thread.Sleep(40); // Adjust the sleep time to change the speed of charging/discharging
+        }
+
+        Console.WriteLine("\nFinal strength level: " + chargeLevel);
+    }
+
+    private void DrawBar(int chargeLevel, int barLength)
+    {
+        Console.SetCursorPosition(12, 8);
+        for (int i = 0; i < barLength; i++)
+        {
+            if (i < chargeLevel)
+            {
+                Console.Write("█");
+            }
+            else
+            {
+                Console.Write(" ");
+            }
+        }
+    }
+
+    private void CheckInput()
+    {
+        while (isRunning)
+        {
+            if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Spacebar)
+            {
+                isRunning = false;
+            }
+            Thread.Sleep(10); // Adjust the sleep time to change the speed of checking for key press
+        }
     }
 }
