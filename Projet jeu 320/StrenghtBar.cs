@@ -13,6 +13,19 @@ public class StrengthBar
 
     public void Start()
     {
+        border = new string[]
+        {
+            "╔══════════════════════╗",
+            "║                      ║",
+            "╚══════════════════════╝"
+        };
+
+        for (int i = 0; i < border.Length; i++)
+        {
+            Console.SetCursorPosition(10, 7 + i);
+            Console.Write(border[i]);
+        }
+
         Thread inputThread = new Thread(CheckInput);
         inputThread.Start();
 
@@ -44,18 +57,7 @@ public class StrengthBar
 
     private void DrawBar(int chargeLevel, int barLength)
     {
-        border = new string[]
-        {
-            "╔══════════════════════╗",
-            "║                      ║",
-            "╚══════════════════════╝" 
-        };
-
-        for (int i = 0; i < border.Length; i++)
-        {
-            Console.SetCursorPosition(10, 7 + i);
-            Console.Write(border[i]);
-        }
+        
 
         Console.SetCursorPosition(12, 8);
         for (int i = 0; i < barLength; i++)
