@@ -42,9 +42,6 @@ namespace Projet_jeu_320
                 $"║ Joueur {numeroJoueur}             ║",
                 $"║ HP: {hp}            ║",
                 $"║ Score: {scoreFormate}           ║",
-                "╚══════════════════════╝",
-                "╔══════════════════════╗",
-               $"║                      ║",
                 "╚══════════════════════╝"
             };
             Color = ConsoleColor.White; //couleur par défaut
