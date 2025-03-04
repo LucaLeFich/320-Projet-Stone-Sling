@@ -27,7 +27,7 @@ namespace Projet_jeu_320
         private bool charging = true;
         private int chargeLevel = 0;
 
-        public HUD(int numeroJoueur, int score, string hp, int hpValue)
+        public HUD(int numeroJoueur, int score, string hp, int hpValue, ConsoleColor color)
         {
             NumeroJoueur = numeroJoueur;
             Score = score;
@@ -44,7 +44,7 @@ namespace Projet_jeu_320
                 $"║ Score: {scoreFormate}           ║",
                 "╚══════════════════════╝"
             };
-            Color = ConsoleColor.White; //couleur par défaut
+            Color = color;
         }
         public string UpdateHP(int hpValue)
         {

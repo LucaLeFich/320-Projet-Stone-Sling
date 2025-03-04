@@ -1,5 +1,7 @@
 ﻿using Microsoft.SqlServer.Server;
+using Projet_320_Stone_Sling;
 using System;
+using System.Media;
 using System.Threading;
 
 public class StrengthBar
@@ -9,10 +11,12 @@ public class StrengthBar
     private int chargeLevel = 1;
     private bool isRunning = true;
 
-    public string[] border {  get; set; } 
+    public ConsoleColor color { get; set; }
+    public string[] border { get; set; }
 
-    public void Start()
+    public void Start(ConsoleColor color)
     {
+        Console.ForegroundColor = color;
         border = new string[]
         {
             "╔══════════════════════╗",
@@ -57,7 +61,7 @@ public class StrengthBar
 
     private void DrawBar(int chargeLevel, int barLength)
     {
-        
+
 
         Console.SetCursorPosition(12, 8);
         for (int i = 0; i < barLength; i++)
