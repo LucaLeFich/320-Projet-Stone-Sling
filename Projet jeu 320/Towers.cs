@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet_320_Stone_Sling
 {
-    internal class Tours
+    internal class Towers
     {
         public string[] Tour {  get; set; }
         public int PosX { get; set; }
@@ -17,7 +17,7 @@ namespace Projet_320_Stone_Sling
         /// <summary>
         /// constructeur pour la tour
         /// </summary>
-        public Tours(int posX, int posY) 
+        public Towers(int posX, int posY) 
         {
             Tour = new string[]
             {
@@ -40,7 +40,7 @@ namespace Projet_320_Stone_Sling
         /// </summary>
         /// <param name="x">position X</param>
         /// <param name="y"></param>
-        public void Afficher(int x, int y)
+        public void Draw(int x, int y)
         {
             Console.ForegroundColor = Color;
 

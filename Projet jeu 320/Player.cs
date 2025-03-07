@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projet_320_Stone_Sling
 {
-    internal class Joueur
+    internal class Player
     {
         public string[] Representation { get; set; }
 
@@ -25,7 +25,7 @@ namespace Projet_320_Stone_Sling
         public ConsoleColor Color { get; set; }
 
         // Constructeur pour le joueur
-        public Joueur(int number, int posX, int posY)
+        public Player(int number, int posX, int posY)
         {
             Number = number;
             Score = Score;
@@ -49,7 +49,7 @@ namespace Projet_320_Stone_Sling
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Afficher(int x, int y)
+        public void Draw(int x, int y)
         {
             Console.ForegroundColor = Color;
 

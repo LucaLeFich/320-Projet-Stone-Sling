@@ -22,23 +22,24 @@ namespace Projet_320_Stone_Sling
             Console.WindowWidth = 150;
 
             // Création des Objets
-            Joueur joueur1 = new Joueur(1, 10, 27) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
-            Joueur joueur2 = new Joueur(2, 135, 27) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
-            Tours tour1 = new Tours(20, 22);
-            Tours tour2 = new Tours(125, 22);
-            Projectile projectileJ1 = new Projectile(joueur1.Color);
-            Projectile projectileJ2 = new Projectile(joueur2.Color);
-            AimPoints aimPoints = new AimPoints(12, 23);
-            HUD hudj1 = new HUD(joueur1.Number,10, 2, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3, joueur1.Color);
-            HUD hudj2 = new HUD(joueur2.Number,115, 2, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3, joueur2.Color);
+            Player player1 = new Player(1, 10, 27) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
+            Player player2 = new Player(2, 135, 27) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
+            Towers tower1 = new Towers(20, 22);
+            Towers tower2 = new Towers(125, 22);
+            Projectile projectileJ1 = new Projectile(player1.Color);
+            Projectile projectileJ2 = new Projectile(player2.Color);
+            AimPoints aimPointsJ1 = new AimPoints(12, 23);
+            AimPoints aimPointsJ2 = new AimPoints(138, 23, true); // Ajout pour joueur 2 avec inversion
+            HUD hudP1 = new HUD(player1.Number, 10, 2, player1.Score = 0, player1.HP = "♥ ♥ ♥", player1.HpValue = 3, player1.Color);
+            HUD hudP2 = new HUD(player2.Number, 115, 2, player2.Score = 0, player2.HP = "♥ ♥ ♥", player2.HpValue = 3, player2.Color);
 
             // Coordonnées pour affichage Objets
-            joueur1.Afficher(joueur1.PosX, joueur1.PosY);
-            joueur2.Afficher(joueur2.PosX, joueur2.PosY);
-            tour1.Afficher(tour1.PosX, tour1.PosY);
-            tour2.Afficher(tour2.PosX, tour2.PosY);
-            hudj1.Afficher(hudj1.PosX, hudj1.PosY);
-            hudj2.Afficher(hudj2.PosX, hudj2.PosY);
+            player1.Draw(player1.PosX, player1.PosY);
+            player2.Draw(player2.PosX, player2.PosY);
+            tower1.Draw(tower1.PosX, tower1.PosY);
+            tower2.Draw(tower2.PosX, tower2.PosY);
+            hudP1.Draw(hudP1.PosX, hudP1.PosY);
+            hudP2.Draw(hudP2.PosX, hudP2.PosY);
 
             bool isAiming = true;
             Stopwatch stopwatch = new Stopwatch();
@@ -46,10 +47,10 @@ namespace Projet_320_Stone_Sling
 
             while (isAiming)
             {
-                int currentIndex = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPoints.aimPoints.Length;
-                float angle = CalculerAngle(stopwatch.ElapsedMilliseconds);
-                aimPoints.Afficher(aimPoints.PosX, aimPoints.PosY, currentIndex);
-                DebugAngle(angle);
+                int currentIndexJ1 = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPointsJ1.aimPoints.Length;
+                float angleJ1 = CalulateAngle(stopwatch.ElapsedMilliseconds);
+                aimPointsJ1.Draw(aimPointsJ1.PosX, aimPointsJ1.PosY, currentIndexJ1);
+                DebugAngle(angleJ1, 0);
                 Thread.Sleep(100);
 
                 if (Console.KeyAvailable)
@@ -66,19 +67,53 @@ namespace Projet_320_Stone_Sling
                         stopwatch.Stop();
 
                         // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
-                        Console.WriteLine($"Angle enregistré: {angle} degrés");
+                        Console.WriteLine($"Angle joueur 1 enregistré: {angleJ1} degrés");
                     }
                 }
                 else
                 {
-                    aimPoints.Clear();
+                    aimPointsJ1.Clear();
                 }
             }
 
             StrengthBar strengthBar = new StrengthBar();
-            strengthBar.Start(joueur1.Color);
-            projectileJ1.Afficher(20, 20);
+            strengthBar.Start(player1.Color);
+            projectileJ1.Draw(20, 20);
 
+            // Début des aimpoints du joueur 2
+            bool isAimingJ2 = true;
+            stopwatch.Restart();
+
+            while (isAimingJ2)
+            {
+                int currentIndexJ2 = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPointsJ2.aimPoints.Length;
+                float angleJ2 = CalulateAngle(stopwatch.ElapsedMilliseconds);
+                aimPointsJ2.Draw(aimPointsJ2.PosX, aimPointsJ2.PosY, currentIndexJ2);
+                DebugAngle(angleJ2, 1);
+                Thread.Sleep(100);
+
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+
+                    if (key.Key == ConsoleKey.Spacebar)
+                    {
+                        isAimingJ2 = false;
+                        stopwatch.Stop();
+
+                        // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
+                        Console.WriteLine($"Angle joueur 2 enregistré: {angleJ2} degrés");
+                    }
+                }
+                else
+                {
+                    aimPointsJ2.Clear();
+                }
+            }
 
             while (true)
             {
@@ -92,37 +127,37 @@ namespace Projet_320_Stone_Sling
 
                     if (key.Key == ConsoleKey.LeftArrow)
                     {
-                        joueur1.Score++;
-                        hudj1 = new HUD(joueur1.Number,hudj1.PosX, hudj1.PosY, joueur1.Score, joueur1.HP, joueur1.HpValue, joueur1.Color);
-                        hudj1.Afficher(hudj1.PosX, hudj1.PosY);
+                        player1.Score++;
+                        hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP, player1.HpValue, player1.Color);
+                        hudP1.Draw(hudP1.PosX, hudP1.PosY);
                     }
 
                     else if (key.Key == ConsoleKey.RightArrow)
                     {
-                        joueur2.Score++;
-                        hudj2 = new HUD(joueur2.Number,hudj2.PosX, hudj2.PosY, joueur2.Score, joueur2.HP, joueur2.HpValue, joueur2.Color);
-                        hudj2.Afficher(hudj2.PosX, hudj2.PosY);
+                        player2.Score++;
+                        hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP, player2.HpValue, player2.Color);
+                        hudP2.Draw(hudP2.PosX, hudP2.PosY);
                     }
 
-                    else if (key.Key == ConsoleKey.DownArrow && joueur1.HpValue > 0)
+                    else if (key.Key == ConsoleKey.DownArrow && player1.HpValue > 0)
                     {
-                        joueur1.HpValue--;
-                        hudj1 = new HUD(joueur1.Number, hudj1.PosX, hudj1.PosY, joueur1.Score, joueur1.HP = hudj1.UpdateHP(joueur1.HpValue), joueur1.HpValue, joueur1.Color);
-                        hudj1.Afficher(hudj1.PosX, hudj1.PosY);
+                        player1.HpValue--;
+                        hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP = hudP1.UpdateHP(player1.HpValue), player1.HpValue, player1.Color);
+                        hudP1.Draw(hudP1.PosX, hudP1.PosY);
 
                     }
 
-                    else if (key.Key == ConsoleKey.UpArrow && joueur2.HpValue > 0)
+                    else if (key.Key == ConsoleKey.UpArrow && player2.HpValue > 0)
                     {
-                        joueur2.HpValue--;
-                        hudj2 = new HUD(joueur2.Number, hudj2.PosX, hudj2.PosY, joueur2.Score, joueur2.HP = hudj2.UpdateHP(joueur2.HpValue), joueur2.HpValue, joueur2.Color);
-                        hudj2.Afficher(hudj2.PosX, hudj2.PosY);
+                        player2.HpValue--;
+                        hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP = hudP2.UpdateHP(player2.HpValue), player2.HpValue, player2.Color);
+                        hudP2.Draw(hudP2.PosX, hudP2.PosY);
 
                     }
                 }
             }
         }
-        static float CalculerAngle(long elapsedMilliseconds)
+        static float CalulateAngle(long elapsedMilliseconds)
         {
             Random random = new Random();
             float blurFactor = (float)(random.NextDouble() * 10.0 - 5.0); // Zone floue entre -5 et +5 degrés
@@ -132,7 +167,6 @@ namespace Projet_320_Stone_Sling
             float angle = baseAngle + blurFactor;
             return Clamp(angle, 0f, 90f); // Contraindre l'angle entre 0 et 90 degrés
         }
-
 
         static float Clamp(float value, float min, float max)
         {
@@ -149,10 +183,10 @@ namespace Projet_320_Stone_Sling
             return value;
         }
 
-        static void DebugAngle(float angle)
+        static void DebugAngle(float angle, int player)
         {
-            Console.SetCursorPosition(0, 0);
-            Console.Write($"Angle actuel: {angle:F2} degrés");
+            Console.SetCursorPosition(0, player);
+            Console.Write($"Angle joueur {player + 1}: {angle:F2} degrés");
         }
     }
 }

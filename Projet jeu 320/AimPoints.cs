@@ -13,15 +13,29 @@ namespace Projet_320_Stone_Sling
         public int PosX { get; set; }
         public int PosY { get; set; }
         public ConsoleColor Color { get; set; }
-        public AimPoints(int posX, int posY)
+
+        public AimPoints(int posX, int posY, bool isMirrored = false)
         {
-            aimPoints = new string[]
+            if (isMirrored)
             {
-                @"●",
-                @" ●",
-                @"  ●",
-                @"   ●"
-            };
+                aimPoints = new string[]
+                {
+                    @"   ●",
+                    @"  ●",
+                    @" ●",
+                    @"●"
+                };
+            }
+            else
+            {
+                aimPoints = new string[]
+                {
+                    @"●",
+                    @" ●",
+                    @"  ●",
+                    @"   ●"
+                };
+            }
             Color = ConsoleColor.Green;
             PosX = posX;
             PosY = posY;
@@ -33,7 +47,7 @@ namespace Projet_320_Stone_Sling
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="activeIndex"></param>
-        public void Afficher(int x, int y, int activeIndex)
+        public void Draw(int x, int y, int activeIndex)
         {
             Console.SetCursorPosition(x, y + activeIndex);
             Console.ForegroundColor = Color;
@@ -41,13 +55,13 @@ namespace Projet_320_Stone_Sling
         }
 
         /// <summary>
-        /// Méthode qui efface les aimpoints pour en afficher que un a la fois
+        /// Méthode qui efface les aimpoints pour n'en afficher qu'un à la fois
         /// </summary>
         public void Clear()
         {
             for (int i = 0; i < aimPoints.Length; i++)
             {
-                Console.SetCursorPosition(12, 23 + i);
+                Console.SetCursorPosition(PosX, PosY + i);
                 Console.Write(new string(' ', aimPoints[i].Length));
             }
         }

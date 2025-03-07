@@ -16,7 +16,7 @@ namespace Projet_320_Stone_Sling
         public int PosY { get; set; }
 
 
-        public int NumeroJoueur { get; set; }
+        public int PlayerID { get; set; }
 
         public int Score { get; set; }
 
@@ -36,26 +36,26 @@ namespace Projet_320_Stone_Sling
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="numeroJoueur"></param>
+        /// <param name="playerID"></param>
         /// <param name="score"></param>
         /// <param name="hp"></param>
         /// <param name="hpValue"></param>
         /// <param name="color"></param>
-        public HUD(int numeroJoueur,int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
+        public HUD(int playerID,int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
         {
-            NumeroJoueur = numeroJoueur;
+            PlayerID = playerID;
             Score = score;
             HP = hp;
             HpValue = hpValue;
 
-            string scoreFormate = Score.ToString("D3");
+            string formattedScore = Score.ToString("D3");
 
             Hud = new string[]
             {
                 "╔══════════════════════╗",
-                $"║ Joueur {numeroJoueur}             ║",
+                $"║ Joueur {playerID}             ║",
                 $"║ HP: {hp}            ║",
-                $"║ Score: {scoreFormate}           ║",
+                $"║ Score: {formattedScore}           ║",
                 "╚══════════════════════╝"
             };
             Color = color;
@@ -84,7 +84,7 @@ namespace Projet_320_Stone_Sling
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Afficher(int x, int y)
+        public void Draw(int x, int y)
         {
             Console.ForegroundColor = Color;
 
