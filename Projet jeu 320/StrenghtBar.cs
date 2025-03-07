@@ -14,11 +14,14 @@ public class StrengthBar
     public ConsoleColor color { get; set; }
     public string[] border { get; set; }
 
+    public int PosX { get; set; }
+    public int PosY { get; set; }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="color"></param>
-    public void Start(ConsoleColor color)
+    public void Start(int posX, int posY,ConsoleColor color)
     {
         Console.ForegroundColor = color;
         border = new string[]
@@ -27,6 +30,8 @@ public class StrengthBar
             "║                      ║",
             "╚══════════════════════╝"
         };
+        PosX = posX;
+        PosY = posY;
 
         for (int i = 0; i < border.Length; i++)
         {

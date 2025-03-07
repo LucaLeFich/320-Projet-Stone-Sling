@@ -47,8 +47,8 @@
     <Compile Include="HUD.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="StrenghtBar.cs" />
-    <Compile Include="Tours.cs" />
-    <Compile Include="Joueurs.cs" />
+    <Compile Include="Towers.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

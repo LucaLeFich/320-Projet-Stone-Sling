@@ -29,7 +29,7 @@ namespace Projet_320_Stone_Sling
             Projectile projectileJ1 = new Projectile(player1.Color);
             Projectile projectileJ2 = new Projectile(player2.Color);
             AimPoints aimPointsJ1 = new AimPoints(12, 23);
-            AimPoints aimPointsJ2 = new AimPoints(138, 23, true); // Ajout pour joueur 2 avec inversion
+            AimPoints aimPointsJ2 = new AimPoints(133, 23, true); // Ajout pour joueur 2 avec inversion
             HUD hudP1 = new HUD(player1.Number, 10, 2, player1.Score = 0, player1.HP = "♥ ♥ ♥", player1.HpValue = 3, player1.Color);
             HUD hudP2 = new HUD(player2.Number, 115, 2, player2.Score = 0, player2.HP = "♥ ♥ ♥", player2.HpValue = 3, player2.Color);
 
@@ -76,8 +76,8 @@ namespace Projet_320_Stone_Sling
                 }
             }
 
-            StrengthBar strengthBar = new StrengthBar();
-            strengthBar.Start(player1.Color);
+            StrengthBar strengthBarP1 = new StrengthBar();
+            strengthBarP1.Start(strengthBarP1.PosX, strengthBarP1.PosY,player1.Color);
             projectileJ1.Draw(20, 20);
 
             // Début des aimpoints du joueur 2
