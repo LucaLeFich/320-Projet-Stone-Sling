@@ -28,7 +28,7 @@ namespace Projet_320_Stone_Sling
             Tours tour2 = new Tours(125, 22);
             Projectile projectileJ1 = new Projectile(joueur1.Color);
             Projectile projectileJ2 = new Projectile(joueur2.Color);
-            AimPoints aimPoints = new AimPoints();
+            AimPoints aimPoints = new AimPoints(12, 23);
             HUD hudj1 = new HUD(joueur1.Number,10, 2, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3, joueur1.Color);
             HUD hudj2 = new HUD(joueur2.Number,115, 2, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3, joueur2.Color);
 
@@ -48,7 +48,7 @@ namespace Projet_320_Stone_Sling
             {
                 int currentIndex = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPoints.aimPoints.Length;
                 float angle = CalculerAngle(stopwatch.ElapsedMilliseconds);
-                aimPoints.Afficher(12, 23, currentIndex);
+                aimPoints.Afficher(aimPoints.PosX, aimPoints.PosY, currentIndex);
                 DebugAngle(angle);
                 Thread.Sleep(100);
 

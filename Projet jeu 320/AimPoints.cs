@@ -10,8 +10,10 @@ namespace Projet_320_Stone_Sling
     {
         public string[] aimPoints { get; set; }
 
+        public int PosX { get; set; }
+        public int PosY { get; set; }
         public ConsoleColor Color { get; set; }
-        public AimPoints()
+        public AimPoints(int posX, int posY)
         {
             aimPoints = new string[]
             {
@@ -21,6 +23,8 @@ namespace Projet_320_Stone_Sling
                 @"   ●"
             };
             Color = ConsoleColor.Green;
+            PosX = posX;
+            PosY = posY;
         }
 
         /// <summary>
