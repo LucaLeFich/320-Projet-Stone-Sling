@@ -1,5 +1,4 @@
-﻿using Projet_320_Stone_Sling;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -7,11 +6,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Projet_jeu_320
+namespace Projet_320_Stone_Sling
 {
     internal class HUD
     {
         public string[] Hud { get; set; }
+
+        
 
         public int NumeroJoueur { get; set; }
 
@@ -19,6 +20,9 @@ namespace Projet_jeu_320
 
         public int HpValue { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string HP { get; set; }
 
         public ConsoleColor Color { get; set; }
@@ -27,6 +31,14 @@ namespace Projet_jeu_320
         private bool charging = true;
         private int chargeLevel = 0;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numeroJoueur"></param>
+        /// <param name="score"></param>
+        /// <param name="hp"></param>
+        /// <param name="hpValue"></param>
+        /// <param name="color"></param>
         public HUD(int numeroJoueur, int score, string hp, int hpValue, ConsoleColor color)
         {
             NumeroJoueur = numeroJoueur;
@@ -63,6 +75,11 @@ namespace Projet_jeu_320
             return HP;
         }
 
+        /// <summary>
+        /// Methode pour afficher le HUD
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Afficher(int x, int y)
         {
             Console.ForegroundColor = Color;

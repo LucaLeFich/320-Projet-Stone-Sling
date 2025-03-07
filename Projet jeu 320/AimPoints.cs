@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet_jeu_320
+namespace Projet_320_Stone_Sling
 {
     internal class AimPoints
     {
@@ -23,6 +23,12 @@ namespace Projet_jeu_320
             Color = ConsoleColor.Green;
         }
 
+        /// <summary>
+        /// Méthode pour afficher les aimpoints
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="activeIndex"></param>
         public void Afficher(int x, int y, int activeIndex)
         {
             Console.SetCursorPosition(x, y + activeIndex);
@@ -30,6 +36,9 @@ namespace Projet_jeu_320
             Console.Write(aimPoints[activeIndex]);
         }
 
+        /// <summary>
+        /// Méthode qui efface les aimpoints pour en afficher que un a la fois
+        /// </summary>
         public void Clear()
         {
             for (int i = 0; i < aimPoints.Length; i++)

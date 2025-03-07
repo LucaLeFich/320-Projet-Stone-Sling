@@ -21,7 +21,7 @@ namespace Projet_320_Stone_Sling
 
         public ConsoleColor Color { get; set; }
 
-        // Constructeur par défaut (représentation générique)
+        // Constructeur pour le joueur
         public Joueur(int number)
         {
             Number = number;
@@ -39,6 +39,11 @@ namespace Projet_320_Stone_Sling
             number = 0; //Nom par défaut
         }
 
+        /// <summary>
+        /// Methode pour afficher le joueur
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Afficher(int x, int y)
         {
             Console.ForegroundColor = Color;

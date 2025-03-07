@@ -14,6 +14,10 @@ public class StrengthBar
     public ConsoleColor color { get; set; }
     public string[] border { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="color"></param>
     public void Start(ConsoleColor color)
     {
         Console.ForegroundColor = color;
@@ -53,12 +57,17 @@ public class StrengthBar
             }
 
             DrawBar(chargeLevel, barLength);
-            Thread.Sleep(40); // Adjust the sleep time to change the speed of charging/discharging
+            Thread.Sleep(40); // changer la valeure modifie la vitesse de la barre
         }
 
-        Console.WriteLine("\nFinal strength level: " + chargeLevel);
+        Console.WriteLine("\n\nFinal strength level: " + chargeLevel); //strength debug
     }
 
+    /// <summary>
+    /// Methode qui affiche la bar
+    /// </summary>
+    /// <param name="chargeLevel"></param>
+    /// <param name="barLength"></param>
     private void DrawBar(int chargeLevel, int barLength)
     {
 
@@ -74,9 +83,13 @@ public class StrengthBar
             {
                 Console.Write(" ");
             }
+
+
         }
     }
-
+    /// <summary>
+    /// Methode qui vérifie en boucle si la touche espace soit pressée
+    /// </summary>
     private void CheckInput()
     {
         while (isRunning)
@@ -85,7 +98,7 @@ public class StrengthBar
             {
                 isRunning = false;
             }
-            Thread.Sleep(10); // Adjust the sleep time to change the speed of checking for key press
+            Thread.Sleep(10); // change la vitesse a laquelle le program verifie que espace soit pressé
         }
     }
 }
