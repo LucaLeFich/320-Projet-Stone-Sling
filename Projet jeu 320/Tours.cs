@@ -9,12 +9,15 @@ namespace Projet_320_Stone_Sling
     internal class Tours
     {
         public string[] Tour {  get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+
         public ConsoleColor Color { get; set; }
 
         /// <summary>
         /// constructeur pour la tour
         /// </summary>
-        public Tours() 
+        public Tours(int posX, int posY) 
         {
             Tour = new string[]
             {
@@ -28,6 +31,8 @@ namespace Projet_320_Stone_Sling
                 @"████"
             };
             Color = ConsoleColor.Yellow; //couleur par défaut
+            PosX = posX;
+            PosY = posY;
         }
 
         /// <summary>

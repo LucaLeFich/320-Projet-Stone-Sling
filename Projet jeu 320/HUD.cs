@@ -12,7 +12,9 @@ namespace Projet_320_Stone_Sling
     {
         public string[] Hud { get; set; }
 
-        
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+
 
         public int NumeroJoueur { get; set; }
 
@@ -39,7 +41,7 @@ namespace Projet_320_Stone_Sling
         /// <param name="hp"></param>
         /// <param name="hpValue"></param>
         /// <param name="color"></param>
-        public HUD(int numeroJoueur, int score, string hp, int hpValue, ConsoleColor color)
+        public HUD(int numeroJoueur,int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
         {
             NumeroJoueur = numeroJoueur;
             Score = score;
@@ -57,6 +59,8 @@ namespace Projet_320_Stone_Sling
                 "╚══════════════════════╝"
             };
             Color = color;
+            PosX = posX;
+            PosY = posY;
         }
         public string UpdateHP(int hpValue)
         {

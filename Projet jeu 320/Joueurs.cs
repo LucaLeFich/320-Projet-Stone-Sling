@@ -12,6 +12,9 @@ namespace Projet_320_Stone_Sling
     {
         public string[] Representation { get; set; }
 
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+
         public int Number { get; set; }
 
         public int Score { get; set; }
@@ -22,7 +25,7 @@ namespace Projet_320_Stone_Sling
         public ConsoleColor Color { get; set; }
 
         // Constructeur pour le joueur
-        public Joueur(int number)
+        public Joueur(int number, int posX, int posY)
         {
             Number = number;
             Score = Score;
@@ -37,6 +40,8 @@ namespace Projet_320_Stone_Sling
             };
             Color = ConsoleColor.White; //couleur par défaut
             number = 0; //Nom par défaut
+            PosX = posX;
+            PosY = posY;
         }
 
         /// <summary>

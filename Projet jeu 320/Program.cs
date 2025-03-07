@@ -22,23 +22,23 @@ namespace Projet_320_Stone_Sling
             Console.WindowWidth = 150;
 
             // Création des Objets
-            Joueur joueur1 = new Joueur(1) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
-            Joueur joueur2 = new Joueur(2) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
-            Tours tour1 = new Tours();
-            Tours tour2 = new Tours();
+            Joueur joueur1 = new Joueur(1, 10, 27) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
+            Joueur joueur2 = new Joueur(2, 135, 27) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
+            Tours tour1 = new Tours(20, 22);
+            Tours tour2 = new Tours(125, 22);
             Projectile projectileJ1 = new Projectile(joueur1.Color);
             Projectile projectileJ2 = new Projectile(joueur2.Color);
             AimPoints aimPoints = new AimPoints();
-            HUD hudj1 = new HUD(joueur1.Number, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3, joueur1.Color);
-            HUD hudj2 = new HUD(joueur2.Number, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3, joueur2.Color);
+            HUD hudj1 = new HUD(joueur1.Number,10, 2, joueur1.Score = 0, joueur1.HP = "♥ ♥ ♥", joueur1.HpValue = 3, joueur1.Color);
+            HUD hudj2 = new HUD(joueur2.Number,115, 2, joueur2.Score = 0, joueur2.HP = "♥ ♥ ♥", joueur2.HpValue = 3, joueur2.Color);
 
             // Coordonnées pour affichage Objets
-            joueur1.Afficher(10, 27);
-            joueur2.Afficher(135, 27);
-            tour1.Afficher(20, 22);
-            tour2.Afficher(125, 22);
-            hudj1.Afficher(10, 2);
-            hudj2.Afficher(115, 2);
+            joueur1.Afficher(joueur1.PosX, joueur1.PosY);
+            joueur2.Afficher(joueur2.PosX, joueur2.PosY);
+            tour1.Afficher(tour1.PosX, tour1.PosY);
+            tour2.Afficher(tour2.PosX, tour2.PosY);
+            hudj1.Afficher(hudj1.PosX, hudj1.PosY);
+            hudj2.Afficher(hudj2.PosX, hudj2.PosY);
 
             bool isAiming = true;
             Stopwatch stopwatch = new Stopwatch();
@@ -93,30 +93,30 @@ namespace Projet_320_Stone_Sling
                     if (key.Key == ConsoleKey.LeftArrow)
                     {
                         joueur1.Score++;
-                        hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP, joueur1.HpValue, joueur1.Color);
-                        hudj1.Afficher(10, 2);
+                        hudj1 = new HUD(joueur1.Number,hudj1.PosX, hudj1.PosY, joueur1.Score, joueur1.HP, joueur1.HpValue, joueur1.Color);
+                        hudj1.Afficher(hudj1.PosX, hudj1.PosY);
                     }
 
                     else if (key.Key == ConsoleKey.RightArrow)
                     {
                         joueur2.Score++;
-                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP, joueur2.HpValue, joueur2.Color);
-                        hudj2.Afficher(115, 2);
+                        hudj2 = new HUD(joueur2.Number,hudj2.PosX, hudj2.PosY, joueur2.Score, joueur2.HP, joueur2.HpValue, joueur2.Color);
+                        hudj2.Afficher(hudj2.PosX, hudj2.PosY);
                     }
 
                     else if (key.Key == ConsoleKey.DownArrow && joueur1.HpValue > 0)
                     {
                         joueur1.HpValue--;
-                        hudj1 = new HUD(joueur1.Number, joueur1.Score, joueur1.HP = hudj1.UpdateHP(joueur1.HpValue), joueur1.HpValue, joueur1.Color);
-                        hudj1.Afficher(10, 2);
+                        hudj1 = new HUD(joueur1.Number, hudj1.PosX, hudj1.PosY, joueur1.Score, joueur1.HP = hudj1.UpdateHP(joueur1.HpValue), joueur1.HpValue, joueur1.Color);
+                        hudj1.Afficher(hudj1.PosX, hudj1.PosY);
 
                     }
 
                     else if (key.Key == ConsoleKey.UpArrow && joueur2.HpValue > 0)
                     {
                         joueur2.HpValue--;
-                        hudj2 = new HUD(joueur2.Number, joueur2.Score, joueur2.HP = hudj2.UpdateHP(joueur2.HpValue), joueur2.HpValue, joueur2.Color);
-                        hudj2.Afficher(115, 2);
+                        hudj2 = new HUD(joueur2.Number, hudj2.PosX, hudj2.PosY, joueur2.Score, joueur2.HP = hudj2.UpdateHP(joueur2.HpValue), joueur2.HpValue, joueur2.Color);
+                        hudj2.Afficher(hudj2.PosX, hudj2.PosY);
 
                     }
                 }
