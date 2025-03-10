@@ -21,7 +21,6 @@ namespace Projet_320_Stone_Sling
 
         public int HpValue { get; set; }
         public string HP { get; set; }
-
         public ConsoleColor Color { get; set; }
 
         // Constructeur pour le joueur

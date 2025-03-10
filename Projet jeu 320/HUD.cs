@@ -11,15 +11,26 @@ namespace Projet_320_Stone_Sling
     internal class HUD
     {
         public string[] Hud { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int PosX { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int PosY { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int PlayerID { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int Score { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int HpValue { get; set; }
 
         /// <summary>

@@ -11,7 +11,7 @@ public class StrengthBar
     private int chargeLevel = 1;
     private bool isRunning = true;
 
-    public ConsoleColor color { get; set; }
+    public ConsoleColor Color { get; set; }
     public string[] border { get; set; }
 
     public int PosX { get; set; }
