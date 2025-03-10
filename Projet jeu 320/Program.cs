@@ -80,6 +80,8 @@ namespace Projet_320_Stone_Sling
             strengthBarP1.Start(strengthBarP1.PosX, strengthBarP1.PosY,player1.Color);
             projectileJ1.Draw(20, 20);
 
+            projectileJ1.Throw();
+
             // Début des aimpoints du joueur 2
             bool isAimingJ2 = true;
             stopwatch.Restart();
