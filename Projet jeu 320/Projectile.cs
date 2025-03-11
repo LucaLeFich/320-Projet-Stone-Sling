@@ -40,20 +40,20 @@ namespace Projet_320_Stone_Sling
             Console.Write(' ');
         }
 
-        public void Throw(double force, double angle, int startX, int startY)
+        public void Throw(double force, double angle, int startX, int startY, bool isReversed = false)
         {
             initialVelocity = force * forceMultiplier; // Augmenter la force du tir
             launchAngle = angle;
 
             double launchAngleRad = launchAngle * (Math.PI / 180);
-            double initialVelocityX = initialVelocity * Math.Cos(launchAngleRad);
+            double initialVelocityX = initialVelocity * Math.Cos(launchAngleRad) * (isReversed ? -1 : 1);
             double initialVelocityY = initialVelocity * Math.Sin(launchAngleRad);
 
             int prevX = startX, prevY = startY;
             currentX = startX;
             currentY = startY;
 
-            while (currentY < consoleHeight)
+            while (currentY < consoleHeight && currentX >= 0 && currentX < consoleWidth)
             {
                 // Calcul de la nouvelle position
                 currentTime += timeInterval;
