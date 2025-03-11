@@ -124,47 +124,7 @@ namespace Projet_320_Stone_Sling
             strengthBarP2.Start(10, 7, player2.Color);
             double player2Force = strengthBarP2.GetChargeLevel();
             var (player2HeadX, player2HeadY) = player2.GetHeadPosition();
-            projectileJ2.Throw(player2Force, angleJ2, player2HeadX, player2HeadY);
-
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Escape)
-                    {
-                        Environment.Exit(0);
-                    }
-
-                    if (key.Key == ConsoleKey.LeftArrow)
-                    {
-                        player1.Score++;
-                        hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP, player1.HpValue, player1.Color);
-                        hudP1.Draw(hudP1.PosX, hudP1.PosY);
-                    }
-
-                    else if (key.Key == ConsoleKey.RightArrow)
-                    {
-                        player2.Score++;
-                        hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP, player2.HpValue, player2.Color);
-                        hudP2.Draw(hudP2.PosX, hudP2.PosY);
-                    }
-
-                    else if (key.Key == ConsoleKey.DownArrow && player1.HpValue > 0)
-                    {
-                        player1.HpValue--;
-                        hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP = hudP1.UpdateHP(player1.HpValue), player1.HpValue, player1.Color);
-                        hudP1.Draw(hudP1.PosX, hudP1.PosY);
-                    }
-
-                    else if (key.Key == ConsoleKey.UpArrow && player2.HpValue > 0)
-                    {
-                        player2.HpValue--;
-                        hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP = hudP2.UpdateHP(player2.HpValue), player2.HpValue, player2.Color);
-                        hudP2.Draw(hudP2.PosX, hudP2.PosY);
-                    }
-                }
-            }
+            projectileJ2.Throw(player2Force, angleJ2, player2HeadX, player2HeadY, true); // Inverser la direction pour le joueur 2
         }
 
         static float CalulateAngle(long elapsedMilliseconds)
