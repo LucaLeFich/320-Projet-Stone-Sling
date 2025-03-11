@@ -9,6 +9,7 @@ namespace Projet_320_Stone_Sling
         const double timeInterval = 0.1;
         const int consoleWidth = 150;
         const int consoleHeight = 40;
+        const double forceMultiplier = 3.0; // Facteur de multiplication pour augmenter la force du tir
 
         double initialVelocity;
         double launchAngle;
@@ -41,7 +42,7 @@ namespace Projet_320_Stone_Sling
 
         public void Throw(double force, double angle, int startX, int startY)
         {
-            initialVelocity = force;
+            initialVelocity = force * forceMultiplier; // Augmenter la force du tir
             launchAngle = angle;
 
             double launchAngleRad = launchAngle * (Math.PI / 180);
