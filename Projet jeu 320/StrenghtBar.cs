@@ -17,11 +17,7 @@ public class StrengthBar
     public int PosX { get; set; }
     public int PosY { get; set; }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="color"></param>
-    public void Start(int posX, int posY,ConsoleColor color)
+    public void Start(int posX, int posY, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         border = new string[]
@@ -68,15 +64,8 @@ public class StrengthBar
         Console.WriteLine("\n\nFinal strength level: " + chargeLevel); //strength debug
     }
 
-    /// <summary>
-    /// Methode qui affiche la bar
-    /// </summary>
-    /// <param name="chargeLevel"></param>
-    /// <param name="barLength"></param>
     private void DrawBar(int chargeLevel, int barLength)
     {
-
-
         Console.SetCursorPosition(12, 8);
         for (int i = 0; i < barLength; i++)
         {
@@ -88,13 +77,9 @@ public class StrengthBar
             {
                 Console.Write(" ");
             }
-
-
         }
     }
-    /// <summary>
-    /// Methode qui vérifie en boucle si la touche espace soit pressée
-    /// </summary>
+
     private void CheckInput()
     {
         while (isRunning)
@@ -105,5 +90,10 @@ public class StrengthBar
             }
             Thread.Sleep(10); // change la vitesse a laquelle le program verifie que espace soit pressé
         }
+    }
+
+    public int GetChargeLevel()
+    {
+        return chargeLevel;
     }
 }

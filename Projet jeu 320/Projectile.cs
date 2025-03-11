@@ -1,115 +1,84 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Projet_320_Stone_Sling
 {
     internal class Projectile
     {
-        // Constantes
-        const double gravity = 9.81; // Accélération due à la gravité en m/s²
-        const double timeInterval = 0.1; // Intervalle de temps en secondes
-        const int consoleWidth = 150; // Largeur de la console en caractères
-        const int consoleHeight = 40; // Hauteur de la console en caractères
+        const double gravity = 9.81;
+        const double timeInterval = 0.1;
+        const int consoleWidth = 150;
+        const int consoleHeight = 40;
 
-        // Variables
         double initialVelocity;
         double launchAngle;
         double currentTime = 0;
         double currentX = 0;
         double currentY = 0;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public char projectile {  get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        public char projectile { get; set; }
         public ConsoleColor Color { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Color"></param>
-        public Projectile(ConsoleColor Color)
+        public Projectile(ConsoleColor color)
         {
             projectile = '●';
-
-            Color = this.Color;
+            Color = color;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
         public void Draw(int x, int y)
         {
             Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = Color;
             Console.Write(projectile);
+            Console.ResetColor();
         }
 
-        public void Throw()
+        public void Clear(int x, int y)
         {
-            // Conversion de l'angle en radians
-            double launchAngleRad = launchAngle * (Math.PI / 180);
+            Console.SetCursorPosition(x, y);
+            Console.Write(' ');
+        }
 
-            // Composantes de la vitesse initiale
+        public void Throw(double force, double angle, int startX, int startY)
+        {
+            initialVelocity = force;
+            launchAngle = angle;
+
+            double launchAngleRad = launchAngle * (Math.PI / 180);
             double initialVelocityX = initialVelocity * Math.Cos(launchAngleRad);
             double initialVelocityY = initialVelocity * Math.Sin(launchAngleRad);
 
-            // Simulation
-            while (currentY >= 0)
+            int prevX = startX, prevY = startY;
+            currentX = startX;
+            currentY = startY;
+
+            while (currentY < consoleHeight)
             {
-                // Effacement de la console
-                Console.Clear();
+                // Calcul de la nouvelle position
+                currentTime += timeInterval;
+                currentX = startX + initialVelocityX * currentTime;
+                currentY = startY - (initialVelocityY * currentTime - 0.5 * gravity * Math.Pow(currentTime, 2));
 
-                // Affichage de l'état actuel
-                Console.WriteLine($"Temps: {currentTime:F2} s, Position: ({currentX:F2} m, {currentY:F2} m)");
+                int x = (int)currentX;
+                int y = (int)currentY;
 
-                // Calcul de la position de la balle
-                int x = (int)(currentX * 2) % consoleWidth; // Conversion de la position x (échelle 1m = 2 caractères)
-                int y = consoleHeight - (int)(currentY * 2); // Conversion de la hauteur (échelle 1m = 2 caractères)
-
-                // S'assurer que x et y sont dans les limites de la console
                 x = Math.Max(0, Math.Min(consoleWidth - 1, x));
                 y = Math.Max(0, Math.Min(consoleHeight - 1, y));
 
-                // Affichage de la balle
-                for (int i = 0; i < consoleHeight; i++)
-                {
-                    if (i == y)
-                    {
-                        try
-                        {
-                            Console.SetCursorPosition(x, i);
-                            Console.Write('O');
-                        }
-                        catch (ArgumentOutOfRangeException e)
-                        {
-                            Console.SetCursorPosition(0, consoleHeight - 1);
-                            Console.WriteLine($"Erreur: {e.Message}");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine();
-                    }
-                }
+                // Effacer la position précédente du projectile
+                Clear(prevX, prevY);
 
-                // Calcul de la nouvelle position
-                currentTime += timeInterval;
-                currentX = initialVelocityX * currentTime;
-                currentY = initialVelocityY * currentTime - 0.5 * gravity * Math.Pow(currentTime, 2);
+                // Dessiner le projectile à la nouvelle position
+                Draw(x, y);
 
-                // Pause pour visualisation
+                prevX = x;
+                prevY = y;
+
                 Thread.Sleep(100);
             }
+
+            // Effacer la dernière position du projectile
+            Clear(prevX, prevY);
         }
     }
 }

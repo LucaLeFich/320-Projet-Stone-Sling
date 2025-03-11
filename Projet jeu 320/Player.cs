@@ -59,5 +59,13 @@ namespace Projet_320_Stone_Sling
             }
             Console.ResetColor(); // Réinitialise la couleur par défaut
         }
+
+        /// <summary>
+        /// Méthode pour obtenir la position de la tête du joueur
+        /// </summary>
+        public (int, int) GetHeadPosition()
+        {
+            return (PosX, PosY);
+        }
     }
 }
