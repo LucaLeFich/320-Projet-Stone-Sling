@@ -67,5 +67,20 @@ namespace Projet_320_Stone_Sling
         {
             return (PosX, PosY);
         }
+
+        /// <summary>
+        /// Méthode pour vérifier la collision avec un projectile
+        /// </summary>
+        public bool CheckCollision(int projX, int projY)
+        {
+            for (int i = 0; i < Representation.Length; i++)
+            {
+                if (projX == PosX && projY == PosY + i)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

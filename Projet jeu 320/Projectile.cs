@@ -41,7 +41,8 @@ namespace Projet_320_Stone_Sling
             Console.Write(' ');
         }
 
-        public void Throw(double force, double angle, int startX, int startY, bool isReversed = false)
+        public void Throw(double force, double angle, int startX, int startY, bool isReversed = false,
+            Player player1 = null, Player player2 = null, Towers tower1 = null, Towers tower2 = null)
         {
             initialVelocity = force * forceMultiplier; // Augmenter la force du tir
             launchAngle = angle;
@@ -73,6 +74,13 @@ namespace Projet_320_Stone_Sling
                 // Dessiner le projectile à la nouvelle position
                 Draw(x, y);
 
+                // Vérifier les collisions
+                if (CheckCollisions(x, y, player1, player2, tower1, tower2, isReversed))
+                {
+                    Clear(x, y);
+                    break;
+                }
+
                 prevX = x;
                 prevY = y;
 
@@ -81,6 +89,62 @@ namespace Projet_320_Stone_Sling
 
             // Effacer la dernière position du projectile
             Clear(prevX, prevY);
+        }
+
+        // Méthode pour vérifier les collisions
+        private bool CheckCollisions(int projX, int projY, Player player1, Player player2, Towers tower1, Towers tower2, bool isReversed)
+        {
+            if (isReversed)
+            {
+                if (player2.CheckCollision(projX, projY))
+                {
+                    player2.HpValue--;
+                    player2.Score -= 1;
+                    return true;
+                }
+                if (player1.CheckCollision(projX, projY))
+                {
+                    player1.HpValue--;
+                    player2.Score += 50;
+                    return true;
+                }
+                if (tower2.CheckCollision(projX, projY))
+                {
+                    player2.Score -= 10;
+                    return true;
+                }
+                if (tower1.CheckCollision(projX, projY))
+                {
+                    player2.Score += 10;
+                    return true;
+                }
+            }
+            else
+            {
+                if (player1.CheckCollision(projX, projY))
+                {
+                    player1.HpValue--;
+                    player1.Score -= 1;
+                    return true;
+                }
+                if (player2.CheckCollision(projX, projY))
+                {
+                    player2.HpValue--;
+                    player1.Score += 50;
+                    return true;
+                }
+                if (tower1.CheckCollision(projX, projY))
+                {
+                    player1.Score -= 10;
+                    return true;
+                }
+                if (tower2.CheckCollision(projX, projY))
+                {
+                    player1.Score += 10;
+                    return true;
+                }
+            }
+            return false;
         }
 
         // Méthode pour réinitialiser les paramètres du projectile

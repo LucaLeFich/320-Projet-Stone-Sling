@@ -8,7 +8,7 @@ namespace Projet_320_Stone_Sling
 {
     internal class Towers
     {
-        public string[] Tour {  get; set; }
+        public string[] Tour { get; set; }
         public int PosX { get; set; }
         public int PosY { get; set; }
 
@@ -17,7 +17,7 @@ namespace Projet_320_Stone_Sling
         /// <summary>
         /// constructeur pour la tour
         /// </summary>
-        public Towers(int posX, int posY) 
+        public Towers(int posX, int posY)
         {
             Tour = new string[]
             {
@@ -50,6 +50,21 @@ namespace Projet_320_Stone_Sling
                 Console.Write(Tour[i]);
             }
             Console.ResetColor(); // Réinitialise la couleur par défaut
+        }
+
+        /// <summary>
+        /// Méthode pour vérifier la collision avec un projectile
+        /// </summary>
+        public bool CheckCollision(int projX, int projY)
+        {
+            for (int i = 0; i < Tour.Length; i++)
+            {
+                if (projX >= PosX && projX < PosX + Tour[i].Length && projY == PosY + i)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

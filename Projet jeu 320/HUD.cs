@@ -11,48 +11,20 @@ namespace Projet_320_Stone_Sling
     internal class HUD
     {
         public string[] Hud { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public int PosX { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public int PosY { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public int PlayerID { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public int Score { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public int HpValue { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public string HP { get; set; }
-
         public ConsoleColor Color { get; set; }
 
         private const int barLength = 20;
         private bool charging = true;
         private int chargeLevel = 0;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="playerID"></param>
-        /// <param name="score"></param>
-        /// <param name="hp"></param>
-        /// <param name="hpValue"></param>
-        /// <param name="color"></param>
-        public HUD(int playerID,int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
+        public HUD(int playerID, int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
         {
             PlayerID = playerID;
             Score = score;
@@ -73,8 +45,10 @@ namespace Projet_320_Stone_Sling
             PosX = posX;
             PosY = posY;
         }
+
         public string UpdateHP(int hpValue)
         {
+            HpValue = hpValue;
             if (hpValue == 2)
             {
                 HP = "♥ ♥ x";
@@ -87,14 +61,18 @@ namespace Projet_320_Stone_Sling
             {
                 HP = "x x x";
             }
+            Draw(PosX, PosY);
             return HP;
         }
 
-        /// <summary>
-        /// Methode pour afficher le HUD
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        public void UpdateScore(int score)
+        {
+            Score = score;
+            string formattedScore = Score.ToString("D3");
+            Hud[3] = $"║ Score: {formattedScore}           ║";
+            Draw(PosX, PosY);
+        }
+
         public void Draw(int x, int y)
         {
             Console.ForegroundColor = Color;
@@ -104,7 +82,7 @@ namespace Projet_320_Stone_Sling
                 Console.SetCursorPosition(x, y + i);
                 Console.Write(Hud[i]);
             }
+            Console.ResetColor(); // Réinitialise la couleur par défaut
         }
-
     }
 }

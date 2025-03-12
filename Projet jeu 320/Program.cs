@@ -15,6 +15,8 @@ namespace Projet_320_Stone_Sling
         static Player player2;
         static HUD hudP1;
         static HUD hudP2;
+        static Towers tower1;
+        static Towers tower2;
 
         static void Main()
         {
@@ -30,8 +32,8 @@ namespace Projet_320_Stone_Sling
             // Création des Objets
             player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
             player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
-            Towers tower1 = new Towers(20, 32);
-            Towers tower2 = new Towers(125, 32);
+            tower1 = new Towers(20, 32);
+            tower2 = new Towers(125, 32);
             Projectile projectileJ1 = new Projectile(player1.Color);
             Projectile projectileJ2 = new Projectile(player2.Color);
             AimPoints aimPointsJ1 = new AimPoints(12, 33);
@@ -107,7 +109,7 @@ namespace Projet_320_Stone_Sling
             if (isReversed)
             {
                 // Ajuster la position de la barre de charge du joueur 2
-                strengthBar.Start(115, 7, player.Color);
+                strengthBar.Start(120, 7, player.Color);
             }
             else
             {
@@ -116,7 +118,13 @@ namespace Projet_320_Stone_Sling
 
             double playerForce = strengthBar.GetChargeLevel();
             var (playerHeadX, playerHeadY) = player.GetHeadPosition();
-            projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed);
+            projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed, player1, player2, tower1, tower2);
+
+            // Mise à jour du score et des points de vie
+            hudP1.UpdateScore(player1.Score);
+            hudP1.UpdateHP(player1.HpValue);
+            hudP2.UpdateScore(player2.Score);
+            hudP2.UpdateHP(player2.HpValue);
         }
 
         static float CalulateAngle(long elapsedMilliseconds)
