@@ -108,50 +108,6 @@ namespace Projet_320_Stone_Sling
             double playerForce = strengthBar.GetChargeLevel();
             var (playerHeadX, playerHeadY) = player.GetHeadPosition();
             projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed);
-
-            // Mise à jour du score et de la santé en fonction des touches
-            UpdateHUD(player, hudP1, hudP2);
-        }
-
-        // Méthode pour mettre à jour le HUD des joueurs
-        static void UpdateHUD(Player player, HUD hudP1, HUD hudP2)
-        {
-            if (Console.KeyAvailable)
-            {
-                var key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Escape)
-                {
-                    Environment.Exit(0);
-                }
-
-                if (key.Key == ConsoleKey.LeftArrow)
-                {
-                    player1.Score++;
-                    hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP, player1.HpValue, player1.Color);
-                    hudP1.Draw(hudP1.PosX, hudP1.PosY);
-                }
-
-                else if (key.Key == ConsoleKey.RightArrow)
-                {
-                    player2.Score++;
-                    hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP, player2.HpValue, player2.Color);
-                    hudP2.Draw(hudP2.PosX, hudP2.PosY);
-                }
-
-                else if (key.Key == ConsoleKey.DownArrow && player1.HpValue > 0)
-                {
-                    player1.HpValue--;
-                    hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP = hudP1.UpdateHP(player1.HpValue), player1.HpValue, player1.Color);
-                    hudP1.Draw(hudP1.PosX, hudP1.PosY);
-                }
-
-                else if (key.Key == ConsoleKey.UpArrow && player2.HpValue > 0)
-                {
-                    player2.HpValue--;
-                    hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP = hudP2.UpdateHP(player2.HpValue), player2.HpValue, player2.Color);
-                    hudP2.Draw(hudP2.PosX, hudP2.PosY);
-                }
-            }
         }
 
         static float CalulateAngle(long elapsedMilliseconds)
