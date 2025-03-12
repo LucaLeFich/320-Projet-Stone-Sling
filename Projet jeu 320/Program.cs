@@ -67,6 +67,9 @@ namespace Projet_320_Stone_Sling
             stopwatch.Start();
             float angle = 0;
 
+            // Réinitialiser la position et le temps du projectile
+            projectile.Reset();
+
             // Sélection de l'angle
             while (isAiming)
             {

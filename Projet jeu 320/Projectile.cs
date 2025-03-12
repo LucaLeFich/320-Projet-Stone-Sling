@@ -13,9 +13,9 @@ namespace Projet_320_Stone_Sling
 
         double initialVelocity;
         double launchAngle;
-        double currentTime = 0;
-        double currentX = 0;
-        double currentY = 0;
+        double currentTime;
+        double currentX;
+        double currentY;
 
         public char projectile { get; set; }
         public ConsoleColor Color { get; set; }
@@ -24,6 +24,7 @@ namespace Projet_320_Stone_Sling
         {
             projectile = '●';
             Color = color;
+            Reset();
         }
 
         public void Draw(int x, int y)
@@ -80,6 +81,16 @@ namespace Projet_320_Stone_Sling
 
             // Effacer la dernière position du projectile
             Clear(prevX, prevY);
+        }
+
+        // Méthode pour réinitialiser les paramètres du projectile
+        public void Reset()
+        {
+            initialVelocity = 0;
+            launchAngle = 0;
+            currentTime = 0;
+            currentX = 0;
+            currentY = 0;
         }
     }
 }
