@@ -10,6 +10,12 @@ namespace Projet_320_Stone_Sling
 {
     internal class Program
     {
+        // Déclaration des joueurs et HUDs en tant que variables de classe
+        static Player player1;
+        static Player player2;
+        static HUD hudP1;
+        static HUD hudP2;
+
         static void Main()
         {
             Console.CursorVisible = false;
@@ -22,16 +28,16 @@ namespace Projet_320_Stone_Sling
             Console.WindowWidth = 150;
 
             // Création des Objets
-            Player player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
-            Player player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
+            player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
+            player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
             Towers tower1 = new Towers(20, 32);
             Towers tower2 = new Towers(125, 32);
             Projectile projectileJ1 = new Projectile(player1.Color);
             Projectile projectileJ2 = new Projectile(player2.Color);
             AimPoints aimPointsJ1 = new AimPoints(12, 33);
             AimPoints aimPointsJ2 = new AimPoints(133, 33, true); // Ajout pour joueur 2 avec inversion
-            HUD hudP1 = new HUD(player1.Number, 10, 2, player1.Score = 0, player1.HP = "♥ ♥ ♥", player1.HpValue = 3, player1.Color);
-            HUD hudP2 = new HUD(player2.Number, 115, 2, player2.Score = 0, player2.HP = "♥ ♥ ♥", player2.HpValue = 3, player2.Color);
+            hudP1 = new HUD(player1.Number, 10, 2, player1.Score = 0, player1.HP = "♥ ♥ ♥", player1.HpValue = 3, player1.Color);
+            hudP2 = new HUD(player2.Number, 115, 2, player2.Score = 0, player2.HP = "♥ ♥ ♥", player2.HpValue = 3, player2.Color);
 
             // Coordonnées pour affichage Objets
             player1.Draw(player1.PosX, player1.PosY);
@@ -41,18 +47,33 @@ namespace Projet_320_Stone_Sling
             hudP1.Draw(hudP1.PosX, hudP1.PosY);
             hudP2.Draw(hudP2.PosX, hudP2.PosY);
 
-            // Joueur 1 - Sélection de l'angle
+            bool isRunning = true;
+
+            while (isRunning)
+            {
+                // Tour du joueur 1
+                PlayTurn(player1, projectileJ1, aimPointsJ1, hudP1, hudP2, false);
+
+                // Tour du joueur 2
+                PlayTurn(player2, projectileJ2, aimPointsJ2, hudP1, hudP2, true);
+            }
+        }
+
+        // Méthode pour gérer le tour d'un joueur
+        static void PlayTurn(Player player, Projectile projectile, AimPoints aimPoints, HUD hudP1, HUD hudP2, bool isReversed)
+        {
             bool isAiming = true;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            float angleJ1 = 0;
+            float angle = 0;
 
+            // Sélection de l'angle
             while (isAiming)
             {
-                int currentIndexJ1 = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPointsJ1.aimPoints.Length;
-                angleJ1 = CalulateAngle(stopwatch.ElapsedMilliseconds);
-                aimPointsJ1.Draw(aimPointsJ1.PosX, aimPointsJ1.PosY, currentIndexJ1);
-                DebugAngle(angleJ1, 0);
+                int currentIndex = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPoints.aimPoints.Length;
+                angle = CalulateAngle(stopwatch.ElapsedMilliseconds);
+                aimPoints.Draw(aimPoints.PosX, aimPoints.PosY, currentIndex);
+                DebugAngle(angle, player.Number - 1);
                 Thread.Sleep(100);
 
                 if (Console.KeyAvailable)
@@ -69,62 +90,65 @@ namespace Projet_320_Stone_Sling
                         stopwatch.Stop();
 
                         // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
-                        Console.WriteLine($"Angle joueur 1 enregistré: {angleJ1} degrés");
+                        Console.WriteLine($"Angle joueur {player.Number} enregistré: {angle} degrés");
                     }
                 }
                 else
                 {
-                    aimPointsJ1.Clear();
+                    aimPoints.Clear();
                 }
             }
 
-            StrengthBar strengthBarP1 = new StrengthBar();
-            strengthBarP1.Start(10, 7, player1.Color);
-            double player1Force = strengthBarP1.GetChargeLevel();
-            var (player1HeadX, player1HeadY) = player1.GetHeadPosition();
-            projectileJ1.Throw(player1Force, angleJ1, player1HeadX, player1HeadY);
+            // Sélection de la force
+            StrengthBar strengthBar = new StrengthBar();
+            strengthBar.Start(10, 7, player.Color);
+            double playerForce = strengthBar.GetChargeLevel();
+            var (playerHeadX, playerHeadY) = player.GetHeadPosition();
+            projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed);
 
-            // Joueur 2 - Sélection de l'angle
-            isAiming = true;
-            stopwatch.Restart();
-            float angleJ2 = 0;
+            // Mise à jour du score et de la santé en fonction des touches
+            UpdateHUD(player, hudP1, hudP2);
+        }
 
-            while (isAiming)
+        // Méthode pour mettre à jour le HUD des joueurs
+        static void UpdateHUD(Player player, HUD hudP1, HUD hudP2)
+        {
+            if (Console.KeyAvailable)
             {
-                int currentIndexJ2 = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPointsJ2.aimPoints.Length;
-                angleJ2 = CalulateAngle(stopwatch.ElapsedMilliseconds);
-                aimPointsJ2.Draw(aimPointsJ2.PosX, aimPointsJ2.PosY, currentIndexJ2);
-                DebugAngle(angleJ2, 1);
-                Thread.Sleep(100);
-
-                if (Console.KeyAvailable)
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Escape)
                 {
-                    var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Escape)
-                    {
-                        Environment.Exit(0);
-                    }
-
-                    if (key.Key == ConsoleKey.Spacebar)
-                    {
-                        isAiming = false;
-                        stopwatch.Stop();
-
-                        // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
-                        Console.WriteLine($"Angle joueur 2 enregistré: {angleJ2} degrés");
-                    }
+                    Environment.Exit(0);
                 }
-                else
+
+                if (key.Key == ConsoleKey.LeftArrow)
                 {
-                    aimPointsJ2.Clear();
+                    player1.Score++;
+                    hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP, player1.HpValue, player1.Color);
+                    hudP1.Draw(hudP1.PosX, hudP1.PosY);
+                }
+
+                else if (key.Key == ConsoleKey.RightArrow)
+                {
+                    player2.Score++;
+                    hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP, player2.HpValue, player2.Color);
+                    hudP2.Draw(hudP2.PosX, hudP2.PosY);
+                }
+
+                else if (key.Key == ConsoleKey.DownArrow && player1.HpValue > 0)
+                {
+                    player1.HpValue--;
+                    hudP1 = new HUD(player1.Number, hudP1.PosX, hudP1.PosY, player1.Score, player1.HP = hudP1.UpdateHP(player1.HpValue), player1.HpValue, player1.Color);
+                    hudP1.Draw(hudP1.PosX, hudP1.PosY);
+                }
+
+                else if (key.Key == ConsoleKey.UpArrow && player2.HpValue > 0)
+                {
+                    player2.HpValue--;
+                    hudP2 = new HUD(player2.Number, hudP2.PosX, hudP2.PosY, player2.Score, player2.HP = hudP2.UpdateHP(player2.HpValue), player2.HpValue, player2.Color);
+                    hudP2.Draw(hudP2.PosX, hudP2.PosY);
                 }
             }
-
-            StrengthBar strengthBarP2 = new StrengthBar();
-            strengthBarP2.Start(10, 7, player2.Color);
-            double player2Force = strengthBarP2.GetChargeLevel();
-            var (player2HeadX, player2HeadY) = player2.GetHeadPosition();
-            projectileJ2.Throw(player2Force, angleJ2, player2HeadX, player2HeadY, true); // Inverser la direction pour le joueur 2
         }
 
         static float CalulateAngle(long elapsedMilliseconds)
