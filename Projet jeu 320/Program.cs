@@ -104,7 +104,16 @@ namespace Projet_320_Stone_Sling
 
             // Sélection de la force
             StrengthBar strengthBar = new StrengthBar();
-            strengthBar.Start(10, 7, player.Color);
+            if (isReversed)
+            {
+                // Ajuster la position de la barre de charge du joueur 2
+                strengthBar.Start(115, 7, player.Color);
+            }
+            else
+            {
+                strengthBar.Start(10, 7, player.Color);
+            }
+
             double playerForce = strengthBar.GetChargeLevel();
             var (playerHeadX, playerHeadY) = player.GetHeadPosition();
             projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed);
