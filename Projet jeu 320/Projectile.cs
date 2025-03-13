@@ -78,12 +78,58 @@ namespace Projet_320_Stone_Sling
                 // Vérifier les collisions avec les tours
                 if (tower1.CheckCollision(x, y))
                 {
+                    if (isReversed)
+                    {
+                        player2.Score += 10; // Joueur 2 touche la tour adverse (gagne des points)
+                    }
+                    else
+                    {
+                        player1.Score -= 10; // Joueur 1 touche sa propre tour (perd des points)
+                    }
                     tower1.DestroyStep();
                     break;
                 }
                 if (tower2.CheckCollision(x, y))
                 {
+                    if (isReversed)
+                    {
+                        player2.Score -= 10; // Joueur 2 touche sa propre tour (perd des points)
+                    }
+                    else
+                    {
+                        player1.Score += 10; // Joueur 1 touche la tour adverse (gagne des points)
+                    }
                     tower2.DestroyStep();
+                    break;
+                }
+
+                // Vérifier les collisions avec les joueurs
+                if (player1.CheckCollision(x, y))
+                {
+                    if (isReversed)
+                    {
+                        player2.Score += 50; // Joueur 2 touche le joueur adverse (gagne des points)
+                        player1.HpValue--;
+                    }
+                    else
+                    {
+                        player1.Score -= 50; // Joueur 1 se touche lui-même (perd des points)
+                        player1.HpValue--;
+                    }
+                    break;
+                }
+                if (player2.CheckCollision(x, y))
+                {
+                    if (isReversed)
+                    {
+                        player2.Score -= 50; // Joueur 2 se touche lui-même (perd des points)
+                        player2.HpValue--;
+                    }
+                    else
+                    {
+                        player1.Score += 50; // Joueur 1 touche le joueur adverse (gagne des points)
+                        player2.HpValue--;
+                    }
                     break;
                 }
 
