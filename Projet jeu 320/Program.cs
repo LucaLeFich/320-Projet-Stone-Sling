@@ -44,8 +44,8 @@ namespace Projet_320_Stone_Sling
             // Coordonnées pour affichage Objets
             player1.Draw(player1.PosX, player1.PosY);
             player2.Draw(player2.PosX, player2.PosY);
-            tower1.Draw(tower1.PosX, tower1.PosY);
-            tower2.Draw(tower2.PosX, tower2.PosY);
+            tower1.Draw();
+            tower2.Draw();
             hudP1.Draw(hudP1.PosX, hudP1.PosY);
             hudP2.Draw(hudP2.PosX, hudP2.PosY);
 
@@ -109,7 +109,7 @@ namespace Projet_320_Stone_Sling
             if (isReversed)
             {
                 // Ajuster la position de la barre de charge du joueur 2
-                strengthBar.Start(120, 7, player.Color);
+                strengthBar.Start(115, 7, player.Color);
             }
             else
             {
