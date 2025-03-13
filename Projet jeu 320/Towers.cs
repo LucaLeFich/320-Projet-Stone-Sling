@@ -113,6 +113,8 @@ namespace Projet_320_Stone_Sling
 
         public bool CheckCollision(int projX, int projY)
         {
+            if (CurrentPhase >= DestructionPhases.Length) return false;
+
             for (int i = 0; i < DestructionPhases[CurrentPhase].Length; i++)
             {
                 if (projX >= PosX && projX < PosX + DestructionPhases[CurrentPhase][i].Length && projY == PosY + i)
