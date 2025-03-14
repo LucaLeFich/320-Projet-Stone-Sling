@@ -6,6 +6,7 @@ namespace Projet_320_Stone_Sling
     {
         public int PosX { get; set; }
         public int PosY { get; set; }
+
         public string[][] DestructionPhases { get; set; }
         public int CurrentPhase { get; private set; }
         public bool IsDestroyed { get; private set; }

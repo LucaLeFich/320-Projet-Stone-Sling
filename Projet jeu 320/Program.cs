@@ -52,7 +52,7 @@ namespace Projet_320_Stone_Sling
             bool isRunning = true;
 
 
-                while (isRunning)
+            while (isRunning)
             {
                 // Tour du joueur 1
                 PlayTurn(player1, projectileJ1, aimPointsJ1, hudP1, hudP2, false);
