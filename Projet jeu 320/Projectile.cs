@@ -49,7 +49,7 @@ namespace Projet_320_Stone_Sling
             currentY = 0;
         }
 
-        public void Throw(double force, double angle, int startX, int startY, bool isReversed, Player player1, Player player2, Towers tower1, Towers tower2)
+        public void Throw(double force, double angle, int startX, int startY, bool isReversed, Player player1, Player player2, Towers tower1, Towers tower2, HUD hudP1, HUD hudP2)
         {
             initialVelocity = force * forceMultiplier; // Augmenter la force du tir
             launchAngle = angle;
@@ -66,81 +66,101 @@ namespace Projet_320_Stone_Sling
             {
                 // Calcul de la nouvelle position
                 currentTime += timeInterval;
-                currentX = startX + initialVelocityX * currentTime;
-                currentY = startY - (initialVelocityY * currentTime - 0.5 * gravity * Math.Pow(currentTime, 2));
+                double nextX = startX + initialVelocityX * currentTime;
+                double nextY = startY - (initialVelocityY * currentTime - 0.5 * gravity * Math.Pow(currentTime, 2));
 
-                int x = (int)currentX;
-                int y = (int)currentY;
-
-                x = Math.Max(0, Math.Min(consoleWidth - 1, x));
-                y = Math.Max(0, Math.Min(consoleHeight - 1, y));
-
-                // Vérifier les collisions avec les tours
-                if (tower1.CheckCollision(x, y))
+                // Interpoler les positions entre prevX, prevY et nextX, nextY
+                int steps = Math.Max(Math.Abs((int)(nextX - currentX)), Math.Abs((int)(nextY - currentY)));
+                for (int step = 1; step <= steps; step++)
                 {
-                    if (isReversed)
+                    double t = (double)step / steps;
+                    int x = (int)(currentX + t * (nextX - currentX));
+                    int y = (int)(currentY + t * (nextY - currentY));
+
+                    x = Math.Max(0, Math.Min(consoleWidth - 1, x));
+                    y = Math.Max(0, Math.Min(consoleHeight - 1, y));
+
+                    // Vérifier les collisions avec les tours
+                    if (tower1.CheckCollision(x, y))
                     {
-                        player2.Score += 10; // Joueur 2 touche la tour adverse (gagne des points)
+                        if (isReversed)
+                        {
+                            player2.Score += 10; // Joueur 2 touche la tour adverse (gagne des points)
+                        }
+                        else
+                        {
+                            player1.Score -= 10; // Joueur 1 touche sa propre tour (perd des points)
+                        }
+                        tower1.DestroyStep();
+                        return;
                     }
-                    else
+                    if (tower2.CheckCollision(x, y))
                     {
-                        player1.Score -= 10; // Joueur 1 touche sa propre tour (perd des points)
+                        if (isReversed)
+                        {
+                            player2.Score -= 10; // Joueur 2 touche sa propre tour (perd des points)
+                        }
+                        else
+                        {
+                            player1.Score += 10; // Joueur 1 touche la tour adverse (gagne des points)
+                        }
+                        tower2.DestroyStep();
+                        return;
                     }
-                    tower1.DestroyStep();
-                    break;
-                }
-                if (tower2.CheckCollision(x, y))
-                {
-                    if (isReversed)
+
+                    // Vérifier les collisions avec les joueurs (ajouter une zone légèrement plus grande)
+                    bool hitPlayer1 = (x >= player1.PosX - 1 && x <= player1.PosX + 1 && y >= player1.PosY && y <= player1.PosY + 2);
+                    bool hitPlayer2 = (x >= player2.PosX - 1 && x <= player2.PosX + 1 && y >= player2.PosY && y <= player2.PosY + 2);
+
+                    if (hitPlayer1)
                     {
-                        player2.Score -= 10; // Joueur 2 touche sa propre tour (perd des points)
+                        if (isReversed)
+                        {
+                            player2.Score += 50; // Joueur 2 touche le joueur adverse (gagne des points)
+                            player1.HpValue--;
+                            hudP1.UpdateHP(player1.HpValue);
+                            hudP1.Draw(hudP1.PosX, hudP1.PosY);
+                        }
+                        else
+                        {
+                            player1.Score -= 50; // Joueur 1 se touche lui-même (perd des points)
+                            player1.HpValue--;
+                            hudP1.UpdateHP(player1.HpValue);
+                            hudP1.Draw(hudP1.PosX, hudP1.PosY);
+                        }
+                        return;
                     }
-                    else
+                    if (hitPlayer2)
                     {
-                        player1.Score += 10; // Joueur 1 touche la tour adverse (gagne des points)
+                        if (isReversed)
+                        {
+                            player2.Score -= 50; // Joueur 2 se touche lui-même (perd des points)
+                            player2.HpValue--;
+                            hudP2.UpdateHP(player2.HpValue);
+                            hudP2.Draw(hudP2.PosX, hudP2.PosY);
+                        }
+                        else
+                        {
+                            player1.Score += 50; // Joueur 1 touche le joueur adverse (gagne des points)
+                            player2.HpValue--;
+                            hudP2.UpdateHP(player2.HpValue);
+                            hudP2.Draw(hudP2.PosX, hudP2.PosY);
+                        }
+                        return;
                     }
-                    tower2.DestroyStep();
-                    break;
+
+                    // Effacer la position précédente du projectile
+                    Clear(prevX, prevY);
+
+                    // Dessiner le projectile à la nouvelle position
+                    Draw(x, y);
+
+                    prevX = x;
+                    prevY = y;
                 }
 
-                // Vérifier les collisions avec les joueurs
-                if (player1.CheckCollision(x, y))
-                {
-                    if (isReversed)
-                    {
-                        player2.Score += 50; // Joueur 2 touche le joueur adverse (gagne des points)
-                        player1.HpValue--;
-                    }
-                    else
-                    {
-                        player1.Score -= 50; // Joueur 1 se touche lui-même (perd des points)
-                        player1.HpValue--;
-                    }
-                    break;
-                }
-                if (player2.CheckCollision(x, y))
-                {
-                    if (isReversed)
-                    {
-                        player2.Score -= 50; // Joueur 2 se touche lui-même (perd des points)
-                        player2.HpValue--;
-                    }
-                    else
-                    {
-                        player1.Score += 50; // Joueur 1 touche le joueur adverse (gagne des points)
-                        player2.HpValue--;
-                    }
-                    break;
-                }
-
-                // Effacer la position précédente du projectile
-                Clear(prevX, prevY);
-
-                // Dessiner le projectile à la nouvelle position
-                Draw(x, y);
-
-                prevX = x;
-                prevY = y;
+                currentX = nextX;
+                currentY = nextY;
 
                 Thread.Sleep(100);
             }
