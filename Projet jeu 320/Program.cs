@@ -12,6 +12,9 @@ using System.Diagnostics;
 
 namespace Projet_320_Stone_Sling
 {
+    /// <summary>
+    /// Classe pour le programme principal
+    /// </summary>
     internal class Program
     {
         // Déclaration des joueurs et HUDs en tant que variables de classe
@@ -38,14 +41,14 @@ namespace Projet_320_Stone_Sling
             Console.WindowWidth = 150;
 
             // Création des Objets
-            player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; // Joueur 1 en bleu
-            player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; // Joueur 2 en rouge
+            player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan };
+            player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red };
             tower1 = new Towers(20, 32);
             tower2 = new Towers(125, 32);
             Projectile projectileJ1 = new Projectile(player1.Color);
             Projectile projectileJ2 = new Projectile(player2.Color);
             AimPoints aimPointsJ1 = new AimPoints(12, 33);
-            AimPoints aimPointsJ2 = new AimPoints(133, 33, true); // Ajout pour joueur 2 avec inversion
+            AimPoints aimPointsJ2 = new AimPoints(133, 33, true);
             hudP1 = new HUD(player1.Number, 10, 2, player1.Score = 0, player1.HP = "♥ ♥ ♥", player1.HpValue = 3, player1.Color);
             hudP2 = new HUD(player2.Number, 115, 2, player2.Score = 0, player2.HP = "♥ ♥ ♥", player2.HpValue = 3, player2.Color);
 

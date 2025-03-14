@@ -1,24 +1,44 @@
-﻿using System;
+﻿///ETML
+///Auteur : Luca Premat
+///Date : 17.01.2025
+///Description : Programme d'un jeu de combat entre deux joueurs inspiré du jeu "Stone Sling"
+using System;
 using System.Threading;
 
 namespace Projet_320_Stone_Sling
 {
+    /// <summary>
+    /// Classe pour les projectiles
+    /// </summary>
     internal class Projectile
     {
-        const double gravity = 9.81; // Accélération due à la gravité
-        const double timeInterval = 0.1; // Intervalle de temps pour la simulation
-        const int consoleWidth = 150; // Largeur de la console
-        const int consoleHeight = 40; // Hauteur de la console
-        const double forceMultiplier = 3.0; // Facteur de multiplication pour augmenter la force du tir
+        // Accélération due à la gravité
+        const double gravity = 9.81;
 
-        double initialVelocity; // Vitesse initiale du projectile
-        double launchAngle; // Angle de lancement du projectile
-        double currentTime = 0; // Temps actuel de la simulation
-        double currentX = 0; // Position X actuelle du projectile
-        double currentY = 0; // Position Y actuelle du projectile
+        // Intervalle de temps pour la simulation
+        const double timeInterval = 0.1;
 
-        public char projectile { get; set; } // Caractère représentant le projectile
-        public ConsoleColor Color { get; set; } // Couleur du projectile
+        // Largeur et hauteur de la console
+        const int consoleWidth = 150;
+        const int consoleHeight = 40;
+
+        // Multiplicateur de la force du tir
+        const double forceMultiplier = 3.0;
+
+        // Vitesse initiale du projectile et angle de lancement
+        double initialVelocity;
+        double launchAngle;
+
+        // Temps actuel de la simulation et position actuelle du projectile
+        double currentTime = 0;
+        double currentX = 0;
+        double currentY = 0;
+
+        // Caractère représentant le projectile
+        public char projectile { get; set; }
+
+        // Couleur du projectile
+        public ConsoleColor Color { get; set; }
 
         /// <summary>
         /// Constructeur pour le projectile
@@ -82,7 +102,8 @@ namespace Projet_320_Stone_Sling
         /// <param name="hudP2"></param>
         public void Throw(double force, double angle, int startX, int startY, bool isReversed, Player player1, Player player2, Towers tower1, Towers tower2, HUD hudP1, HUD hudP2)
         {
-            initialVelocity = force * forceMultiplier; // Augmenter la force du tir
+            // Augmenter la force du tir
+            initialVelocity = force * forceMultiplier;
             launchAngle = angle;
 
             double launchAngleRad = launchAngle * (Math.PI / 180);
@@ -116,11 +137,13 @@ namespace Projet_320_Stone_Sling
                     {
                         if (isReversed)
                         {
-                            player2.Score += 10; // Joueur 2 touche la tour adverse (gagne des points)
+                            // Joueur 2 touche la tour adverse (gagne des points)
+                            player2.Score += 10;
                         }
                         else
                         {
-                            player1.Score -= 10; // Joueur 1 touche sa propre tour (perd des points)
+                            // Joueur 1 touche sa propre tour (perd des points)
+                            player1.Score -= 10;
                         }
                         tower1.DestroyStep();
                         return;
@@ -129,11 +152,13 @@ namespace Projet_320_Stone_Sling
                     {
                         if (isReversed)
                         {
-                            player2.Score -= 10; // Joueur 2 touche sa propre tour (perd des points)
+                            // Joueur 2 touche sa propre tour (perd des points)
+                            player2.Score -= 10;
                         }
                         else
                         {
-                            player1.Score += 10; // Joueur 1 touche la tour adverse (gagne des points)
+                            // Joueur 1 touche la tour adverse (gagne des points)
+                            player1.Score += 10;
                         }
                         tower2.DestroyStep();
                         return;
@@ -147,14 +172,16 @@ namespace Projet_320_Stone_Sling
                     {
                         if (isReversed)
                         {
-                            player2.Score += 50; // Joueur 2 touche le joueur adverse (gagne des points)
+                            // Joueur 2 touche le joueur adverse (gagne des points)
+                            player2.Score += 50;
                             player1.HpValue--;
                             hudP1.UpdateHP(player1.HpValue);
                             hudP1.Draw(hudP1.PosX, hudP1.PosY);
                         }
                         else
                         {
-                            player1.Score -= 50; // Joueur 1 se touche lui-même (perd des points)
+                            // Joueur 1 se touche lui-même (perd des points)
+                            player1.Score -= 50;
                             player1.HpValue--;
                             hudP1.UpdateHP(player1.HpValue);
                             hudP1.Draw(hudP1.PosX, hudP1.PosY);
@@ -165,14 +192,16 @@ namespace Projet_320_Stone_Sling
                     {
                         if (isReversed)
                         {
-                            player2.Score -= 50; // Joueur 2 se touche lui-même (perd des points)
+                            // Joueur 2 se touche lui-même (perd des points)
+                            player2.Score -= 50;
                             player2.HpValue--;
                             hudP2.UpdateHP(player2.HpValue);
                             hudP2.Draw(hudP2.PosX, hudP2.PosY);
                         }
                         else
                         {
-                            player1.Score += 50; // Joueur 1 touche le joueur adverse (gagne des points)
+                            // Joueur 1 touche le joueur adverse (gagne des points)
+                            player1.Score += 50;
                             player2.HpValue--;
                             hudP2.UpdateHP(player2.HpValue);
                             hudP2.Draw(hudP2.PosX, hudP2.PosY);

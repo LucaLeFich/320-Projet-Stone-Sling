@@ -1,4 +1,8 @@
-﻿using System;
+﻿///ETML
+///Auteur : Luca Premat
+///Date : 17.01.2025
+///Description : Programme d'un jeu de combat entre deux joueurs inspiré du jeu "Stone Sling"
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Projet_320_Stone_Sling
 {
+    /// <summary>
+    /// Classe pour les points de visée
+    /// </summary>
     internal class AimPoints
     {
         // Représentation graphique des points de visée

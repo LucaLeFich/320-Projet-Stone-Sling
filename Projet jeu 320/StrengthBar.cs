@@ -1,20 +1,40 @@
-﻿using System;
+﻿///ETML
+///Auteur : Luca Premat
+///Date : 17.01.2025
+///Description : Programme d'un jeu de combat entre deux joueurs inspiré du jeu "Stone Sling"
+using System;
 using System.Threading;
 
 namespace Projet_320_Stone_Sling
 {
+    /// <summary>
+    /// Classe pour la barre de force
+    /// </summary>
     internal class StrengthBar
     {
-        private const int barLength = 20; // Longueur de la barre de force
-        private bool charging = true; // Indicateur si la barre de force est en train de charger
-        private int chargeLevel = 1; // Niveau de charge initial de la barre de force
-        private bool isRunning = true; // Indicateur si la barre de force est en cours d'exécution
+        // Longueur de la barre de force
+        private const int barLength = 20;
 
-        public ConsoleColor Color { get; set; } // Couleur de la barre de force
-        public string[] Border { get; set; } // Bordure de la barre de force
+        // Indicateur si la barre de force est en train de charger
+        private bool charging = true;
 
-        public int PosX { get; set; } // Position X de la barre de force
-        public int PosY { get; set; } // Position Y de la barre de force
+        // Niveau de charge initial de la barre de force
+        private int chargeLevel = 1;
+
+        // Indicateur si la barre de force est en cours d'exécution
+        private bool isRunning = true;
+
+        // Couleur de la barre de force
+        public ConsoleColor Color { get; set; }
+
+        // Bordure de la barre de force
+        public string[] Border { get; set; }
+
+        // Position X de la barre de force
+        public int PosX { get; set; }
+
+        // Position Y de la barre de force
+        public int PosY { get; set; }
 
         /// <summary>
         /// Méthode pour démarrer la barre de force
@@ -63,7 +83,9 @@ namespace Projet_320_Stone_Sling
                 }
 
                 DrawBar(chargeLevel, barLength);
-                Thread.Sleep(40); // changer la valeur modifie la vitesse de la barre
+
+                // changer la valeur modifie la vitesse de la barre
+                Thread.Sleep(40);
             }
         }
 
@@ -99,7 +121,8 @@ namespace Projet_320_Stone_Sling
                 {
                     isRunning = false;
                 }
-                Thread.Sleep(10); // change la vitesse à laquelle le programme vérifie que l'espace soit pressé
+                // change la vitesse à laquelle le programme vérifie que l'espace soit pressé
+                Thread.Sleep(10);
             }
         }
 
