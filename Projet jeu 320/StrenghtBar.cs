@@ -5,17 +5,23 @@ namespace Projet_320_Stone_Sling
 {
     internal class StrengthBar
     {
-        private const int barLength = 20;
-        private bool charging = true;
-        private int chargeLevel = 1;
-        private bool isRunning = true;
+        private const int barLength = 20; // Longueur de la barre de force
+        private bool charging = true; // Indicateur si la barre de force est en train de charger
+        private int chargeLevel = 1; // Niveau de charge initial de la barre de force
+        private bool isRunning = true; // Indicateur si la barre de force est en cours d'exécution
 
-        public ConsoleColor Color { get; set; }
-        public string[] Border { get; set; }
+        public ConsoleColor Color { get; set; } // Couleur de la barre de force
+        public string[] Border { get; set; } // Bordure de la barre de force
 
-        public int PosX { get; set; }
-        public int PosY { get; set; }
+        public int PosX { get; set; } // Position X de la barre de force
+        public int PosY { get; set; } // Position Y de la barre de force
 
+        /// <summary>
+        /// Méthode pour démarrer la barre de force
+        /// </summary>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <param name="color"></param>
         public void Start(int posX, int posY, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -57,10 +63,15 @@ namespace Projet_320_Stone_Sling
                 }
 
                 DrawBar(chargeLevel, barLength);
-                Thread.Sleep(40); // changer la valeure modifie la vitesse de la barre
+                Thread.Sleep(40); // changer la valeur modifie la vitesse de la barre
             }
         }
 
+        /// <summary>
+        /// Méthode pour dessiner la barre de force
+        /// </summary>
+        /// <param name="chargeLevel"></param>
+        /// <param name="barLength"></param>
         private void DrawBar(int chargeLevel, int barLength)
         {
             Console.SetCursorPosition(PosX + 2, PosY + 1);
@@ -77,6 +88,9 @@ namespace Projet_320_Stone_Sling
             }
         }
 
+        /// <summary>
+        /// Méthode pour vérifier l'entrée de l'utilisateur
+        /// </summary>
         private void CheckInput()
         {
             while (isRunning)
@@ -85,10 +99,14 @@ namespace Projet_320_Stone_Sling
                 {
                     isRunning = false;
                 }
-                Thread.Sleep(10); // change la vitesse a laquelle le program verifie que espace soit pressé
+                Thread.Sleep(10); // change la vitesse à laquelle le programme vérifie que l'espace soit pressé
             }
         }
 
+        /// <summary>
+        /// Méthode pour obtenir le niveau de charge actuel
+        /// </summary>
+        /// <returns></returns>
         public int GetChargeLevel()
         {
             return chargeLevel;

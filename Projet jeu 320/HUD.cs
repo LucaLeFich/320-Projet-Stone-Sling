@@ -10,8 +10,10 @@ namespace Projet_320_Stone_Sling
 {
     internal class HUD
     {
+        // Représentation graphique du HUD
         public string[] Hud { get; set; }
 
+        // Position X du HUD
         private int posX;
         public int PosX
         {
@@ -19,6 +21,7 @@ namespace Projet_320_Stone_Sling
             set { posX = value; }
         }
 
+        // Position Y du HUD
         private int posY;
         public int PosY
         {
@@ -26,6 +29,7 @@ namespace Projet_320_Stone_Sling
             set { posY = value; }
         }
 
+        // Informations du joueur
         public int PlayerID { get; set; }
         public int Score { get; set; }
         public int HpValue { get; set; }
@@ -36,6 +40,16 @@ namespace Projet_320_Stone_Sling
         private bool charging = true;
         private int chargeLevel = 0;
 
+        /// <summary>
+        /// Constructeur pour le HUD
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <param name="score"></param>
+        /// <param name="hp"></param>
+        /// <param name="hpValue"></param>
+        /// <param name="color"></param>
         public HUD(int playerID, int posX, int posY, int score, string hp, int hpValue, ConsoleColor color)
         {
             PlayerID = playerID;
@@ -58,6 +72,11 @@ namespace Projet_320_Stone_Sling
             PosY = posY;
         }
 
+        /// <summary>
+        /// Méthode pour mettre à jour les points de vie
+        /// </summary>
+        /// <param name="hpValue"></param>
+        /// <returns></returns>
         public string UpdateHP(int hpValue)
         {
             HpValue = hpValue;
@@ -78,6 +97,10 @@ namespace Projet_320_Stone_Sling
             return HP;
         }
 
+        /// <summary>
+        /// Méthode pour mettre à jour le score
+        /// </summary>
+        /// <param name="score"></param>
         public void UpdateScore(int score)
         {
             Score = score;
@@ -86,6 +109,11 @@ namespace Projet_320_Stone_Sling
             Draw(PosX, PosY);
         }
 
+        /// <summary>
+        /// Méthode pour afficher le HUD
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Draw(int x, int y)
         {
             Console.ForegroundColor = Color;

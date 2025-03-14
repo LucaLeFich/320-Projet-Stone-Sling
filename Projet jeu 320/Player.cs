@@ -10,8 +10,10 @@ namespace Projet_320_Stone_Sling
 {
     internal class Player
     {
+        // Représentation graphique du joueur
         public string[] Representation { get; set; }
 
+        // Position X du joueur
         private int posX;
         public int PosX
         {
@@ -19,6 +21,7 @@ namespace Projet_320_Stone_Sling
             set { posX = value; }
         }
 
+        // Position Y du joueur
         private int posY;
         public int PosY
         {
@@ -26,15 +29,23 @@ namespace Projet_320_Stone_Sling
             set { posY = value; }
         }
 
+        // Numéro du joueur
         public int Number { get; set; }
 
+        // Score du joueur
         public int Score { get; set; }
 
+        // Points de vie du joueur
         public int HpValue { get; set; }
         public string HP { get; set; }
         public ConsoleColor Color { get; set; }
 
-        // Constructeur pour le joueur
+        /// <summary>
+        /// Constructeur pour le joueur
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
         public Player(int number, int posX, int posY)
         {
             Number = number;
@@ -48,14 +59,14 @@ namespace Projet_320_Stone_Sling
                 @"/░\",
                 @"/ \"
             };
-            Color = ConsoleColor.White; //couleur par défaut
-            number = 0; //Nom par défaut
+            Color = ConsoleColor.White; // Couleur par défaut
+            number = 0; // Nom par défaut
             PosX = posX;
             PosY = posY;
         }
 
         /// <summary>
-        /// Methode pour afficher le joueur
+        /// Méthode pour afficher le joueur
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -74,6 +85,7 @@ namespace Projet_320_Stone_Sling
         /// <summary>
         /// Méthode pour obtenir la position de la tête du joueur
         /// </summary>
+        /// <returns></returns>
         public (int, int) GetHeadPosition()
         {
             return (PosX, PosY);
@@ -82,6 +94,9 @@ namespace Projet_320_Stone_Sling
         /// <summary>
         /// Méthode pour vérifier la collision avec un projectile
         /// </summary>
+        /// <param name="projX"></param>
+        /// <param name="projY"></param>
+        /// <returns></returns>
         public bool CheckCollision(int projX, int projY)
         {
             for (int i = 0; i < Representation.Length; i++)

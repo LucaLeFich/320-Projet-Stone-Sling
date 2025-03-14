@@ -8,8 +8,10 @@ namespace Projet_320_Stone_Sling
 {
     internal class AimPoints
     {
+        // Représentation graphique des points de visée
         public string[] aimPoints { get; set; }
 
+        // Position X des points de visée
         private int posX;
         public int PosX
         {
@@ -17,6 +19,7 @@ namespace Projet_320_Stone_Sling
             set { posX = value; }
         }
 
+        // Position Y des points de visée
         private int posY;
         public int PosY
         {
@@ -26,6 +29,12 @@ namespace Projet_320_Stone_Sling
 
         public ConsoleColor Color { get; set; }
 
+        /// <summary>
+        /// Constructeur pour les points de visée
+        /// </summary>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <param name="isMirrored"></param>
         public AimPoints(int posX, int posY, bool isMirrored = false)
         {
             if (isMirrored)
@@ -54,7 +63,7 @@ namespace Projet_320_Stone_Sling
         }
 
         /// <summary>
-        /// Méthode pour afficher les aimpoints
+        /// Méthode pour afficher les points de visée
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -67,7 +76,7 @@ namespace Projet_320_Stone_Sling
         }
 
         /// <summary>
-        /// Méthode qui efface les aimpoints pour n'en afficher qu'un à la fois
+        /// Méthode qui efface les points de visée pour n'en afficher qu'un à la fois
         /// </summary>
         public void Clear()
         {

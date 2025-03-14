@@ -1,4 +1,8 @@
-﻿using System;
+﻿///ETML
+///Auteur : Luca Premat
+///Date : 17.01.2025
+///Description : Programme d'un jeu de combat entre deux joueurs inspiré du jeu "Stone Sling"
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +22,12 @@ namespace Projet_320_Stone_Sling
         static Towers tower1;
         static Towers tower2;
 
+        /// <summary>
+        /// Méthode principale
+        /// </summary>
         static void Main()
         {
+            // Masquer le curseur de la console
             Console.CursorVisible = false;
 
             // Pour afficher "●"
@@ -51,7 +59,6 @@ namespace Projet_320_Stone_Sling
 
             bool isRunning = true;
 
-
             while (isRunning)
             {
                 // Tour du joueur 1
@@ -76,7 +83,15 @@ namespace Projet_320_Stone_Sling
             }
         }
 
-        // Méthode pour gérer le tour d'un joueur
+        /// <summary>
+        /// Méthode pour gérer le tour d'un joueur
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="projectile"></param>
+        /// <param name="aimPoints"></param>
+        /// <param name="hudP1"></param>
+        /// <param name="hudP2"></param>
+        /// <param name="isReversed"></param>
         static void PlayTurn(Player player, Projectile projectile, AimPoints aimPoints, HUD hudP1, HUD hudP2, bool isReversed)
         {
             bool isAiming = true;
@@ -138,6 +153,11 @@ namespace Projet_320_Stone_Sling
             hudP2.UpdateHP(player2.HpValue);
         }
 
+        /// <summary>
+        /// Méthode pour calculer l'angle
+        /// </summary>
+        /// <param name="elapsedMilliseconds"></param>
+        /// <returns></returns>
         static float CalulateAngle(long elapsedMilliseconds)
         {
             Random random = new Random();
@@ -149,6 +169,13 @@ namespace Projet_320_Stone_Sling
             return Clamp(angle, 0f, 90f); // Contraindre l'angle entre 0 et 90 degrés
         }
 
+        /// <summary>
+        /// Méthode pour contraindre une valeur entre un minimum et un maximum
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         static float Clamp(float value, float min, float max)
         {
             if (value < min) return min;
@@ -156,6 +183,10 @@ namespace Projet_320_Stone_Sling
             return value;
         }
 
+        /// <summary>
+        /// Méthode pour afficher l'écran de fin de jeu
+        /// </summary>
+        /// <param name="winner"></param>
         static void GameOver(Player winner)
         {
             Console.Clear();
