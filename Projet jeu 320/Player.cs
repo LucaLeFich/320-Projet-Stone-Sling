@@ -12,8 +12,19 @@ namespace Projet_320_Stone_Sling
     {
         public string[] Representation { get; set; }
 
-        public int PosX { get; set; }
-        public int PosY { get; set; }
+        private int posX;
+        public int PosX
+        {
+            get { return posX; }
+            set { posX = value; }
+        }
+
+        private int posY;
+        public int PosY
+        {
+            get { return posY; }
+            set { posY = value; }
+        }
 
         public int Number { get; set; }
 
