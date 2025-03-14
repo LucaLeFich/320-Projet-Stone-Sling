@@ -53,14 +53,15 @@ namespace Projet_320_Stone_Sling
             {
                 HP = "♥ ♥ x";
             }
-            if (hpValue == 1)
+            else if (hpValue == 1)
             {
                 HP = "♥ x x";
             }
-            if (hpValue == 0)
+            else if (hpValue == 0)
             {
                 HP = "x x x";
             }
+            Hud[2] = $"║ HP: {HP}            ║";
             Draw(PosX, PosY);
             return HP;
         }
