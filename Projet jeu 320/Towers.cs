@@ -77,7 +77,7 @@ namespace Projet_320_Stone_Sling
         {
             if (IsDestroyed) return;
 
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             for (int i = 0; i < DestructionPhases[CurrentPhase].Length; i++)
             {
