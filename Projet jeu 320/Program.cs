@@ -22,16 +22,16 @@ namespace Projet_320_Stone_Sling
         {
             Console.CursorVisible = false;
 
-            //Pour afficher "●"
+            // Pour afficher "●"
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            //Taille de la console
+            // Taille de la console
             Console.WindowHeight = 40;
             Console.WindowWidth = 150;
 
             // Création des Objets
-            player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; //Joueur 1 en bleu
-            player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; //Joueur 2 en rouge
+            player1 = new Player(1, 10, 37) { Color = ConsoleColor.Cyan }; // Joueur 1 en bleu
+            player2 = new Player(2, 135, 37) { Color = ConsoleColor.Red }; // Joueur 2 en rouge
             tower1 = new Towers(20, 32);
             tower2 = new Towers(125, 32);
             Projectile projectileJ1 = new Projectile(player1.Color);
@@ -51,13 +51,28 @@ namespace Projet_320_Stone_Sling
 
             bool isRunning = true;
 
-            while (isRunning)
+
+                while (isRunning)
             {
                 // Tour du joueur 1
                 PlayTurn(player1, projectileJ1, aimPointsJ1, hudP1, hudP2, false);
 
+                // Vérifier si le joueur 2 a perdu
+                if (player2.HpValue <= 0)
+                {
+                    GameOver(player1);
+                    break;
+                }
+
                 // Tour du joueur 2
                 PlayTurn(player2, projectileJ2, aimPointsJ2, hudP1, hudP2, true);
+
+                // Vérifier si le joueur 1 a perdu
+                if (player1.HpValue <= 0)
+                {
+                    GameOver(player2);
+                    break;
+                }
             }
         }
 
@@ -118,7 +133,7 @@ namespace Projet_320_Stone_Sling
 
             double playerForce = strengthBar.GetChargeLevel();
             var (playerHeadX, playerHeadY) = player.GetHeadPosition();
-            projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed, player1, player2, tower1, tower2);
+            projectile.Throw(playerForce, angle, playerHeadX, playerHeadY, isReversed, player1, player2, tower1, tower2, hudP1, hudP2);
 
             // Mise à jour du score et des points de vie
             hudP1.UpdateScore(player1.Score);
@@ -149,6 +164,49 @@ namespace Projet_320_Stone_Sling
         {
             Console.SetCursorPosition(0, player);
             Console.Write($"Angle joueur {player + 1}: {angle:F2} degrés");
+        }
+
+        static void GameOver(Player winner)
+        {
+            Console.Clear();
+            string gameOverText = "GAME OVER";
+            string winnerText = $"Le joueur {winner.Number} a gagné!";
+            string scoreTextP1 = $"Score du joueur 1: {player1.Score}";
+            string scoreTextP2 = $"Score du joueur 2: {player2.Score}";
+
+            // Positionner le texte "GAME OVER" au centre de l'écran
+            int centerX = (Console.WindowWidth - gameOverText.Length) / 2;
+            int centerY = Console.WindowHeight / 2;
+
+            Console.SetCursorPosition(centerX, centerY);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(gameOverText);
+
+            // Positionner le texte du gagnant en dessous
+            int winnerTextX = (Console.WindowWidth - winnerText.Length) / 2;
+            int winnerTextY = centerY + 2;
+
+            Console.SetCursorPosition(winnerTextX, winnerTextY);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(winnerText);
+
+            // Positionner les scores des joueurs en dessous
+            int scoreTextP1X = (Console.WindowWidth - scoreTextP1.Length) / 2;
+            int scoreTextP1Y = winnerTextY + 2;
+
+            Console.SetCursorPosition(scoreTextP1X, scoreTextP1Y);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(scoreTextP1);
+
+            int scoreTextP2X = (Console.WindowWidth - scoreTextP2.Length) / 2;
+            int scoreTextP2Y = scoreTextP1Y + 1;
+
+            Console.SetCursorPosition(scoreTextP2X, scoreTextP2Y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(scoreTextP2);
+
+            Console.ResetColor();
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
         }
     }
 }
