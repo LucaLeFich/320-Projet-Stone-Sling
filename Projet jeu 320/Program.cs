@@ -93,7 +93,6 @@ namespace Projet_320_Stone_Sling
                 int currentIndex = (int)(stopwatch.ElapsedMilliseconds / 400) % aimPoints.aimPoints.Length;
                 angle = CalulateAngle(stopwatch.ElapsedMilliseconds);
                 aimPoints.Draw(aimPoints.PosX, aimPoints.PosY, currentIndex);
-                DebugAngle(angle, player.Number - 1);
                 Thread.Sleep(100);
 
                 if (Console.KeyAvailable)
@@ -108,9 +107,6 @@ namespace Projet_320_Stone_Sling
                     {
                         isAiming = false;
                         stopwatch.Stop();
-
-                        // Enregistrer l'angle relatif basé sur le temps écoulé avec une zone floue
-                        Console.WriteLine($"Angle joueur {player.Number} enregistré: {angle} degrés");
                     }
                 }
                 else
@@ -158,12 +154,6 @@ namespace Projet_320_Stone_Sling
             if (value < min) return min;
             if (value > max) return max;
             return value;
-        }
-
-        static void DebugAngle(float angle, int player)
-        {
-            Console.SetCursorPosition(0, player);
-            Console.Write($"Angle joueur {player + 1}: {angle:F2} degrés");
         }
 
         static void GameOver(Player winner)

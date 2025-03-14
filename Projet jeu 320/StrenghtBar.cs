@@ -59,8 +59,6 @@ namespace Projet_320_Stone_Sling
                 DrawBar(chargeLevel, barLength);
                 Thread.Sleep(40); // changer la valeure modifie la vitesse de la barre
             }
-
-            Console.WriteLine("\n\nFinal strength level: " + chargeLevel); //strength debug
         }
 
         private void DrawBar(int chargeLevel, int barLength)
