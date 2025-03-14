@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Projet_320_Stone_Sling.HUD">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAACAAAAAAAggAAAAEwAAgUAAAAAAAAAAAwEAIAAA=</HashCode>
+      <FileName>HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.AimPoints">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAwAAACAAAAAAAAAAAwABAAAA=</HashCode>
+      <FileName>AimPoints.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.GameOver">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.Player">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAggAAEAAwAAAQAAAAACAAAAAwEggAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.Program">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAAQAAABAAAAAAAAgAAAAAQAAAAAAAAACAAABAAAAEA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.Projectile">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAgAAAAQBgAgAAAAAAAAAAhAQACAAwAAgABAAAA=</HashCode>
+      <FileName>Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.StrengthBar">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACABACAAAABAAEAAwAAAEAAAAAAAAAAAgAAoAAA=</HashCode>
+      <FileName>StrengthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projet_320_Stone_Sling.Towers">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgJQAAQAwAAAAAAAAACAAAAAAABAAAA=</HashCode>
+      <FileName>Towers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
