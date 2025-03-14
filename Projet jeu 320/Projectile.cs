@@ -164,7 +164,7 @@ namespace Projet_320_Stone_Sling
                         return;
                     }
 
-                    // Vérifier les collisions avec les joueurs (ajouter une zone légèrement plus grande)
+                    // Vérifier les collisions avec les joueurs
                     bool hitPlayer1 = (x >= player1.PosX - 1 && x <= player1.PosX && y >= player1.PosY - 1 && y <= player1.PosY + 2);
                     bool hitPlayer2 = (x >= player2.PosX - 1 && x <= player2.PosX + 1 && y >= player2.PosY - 1 && y <= player2.PosY + 2);
 
