@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AimPoints.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="StrengthBar.cs" />

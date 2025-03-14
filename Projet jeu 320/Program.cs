@@ -1,8 +1,4 @@
-﻿///ETML
-///Auteur : Luca Premat
-///Date : 17.01.2025
-///Description : Programme d'un jeu de combat entre deux joueurs inspiré du jeu "Stone Sling"
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,7 +66,7 @@ namespace Projet_320_Stone_Sling
                 // Vérifier si le joueur 2 a perdu
                 if (player2.HpValue <= 0)
                 {
-                    GameOver(player1);
+                    GameOver.Show(player1, player1, player2);
                     break;
                 }
 
@@ -80,7 +76,7 @@ namespace Projet_320_Stone_Sling
                 // Vérifier si le joueur 1 a perdu
                 if (player1.HpValue <= 0)
                 {
-                    GameOver(player2);
+                    GameOver.Show(player2, player1, player2);
                     break;
                 }
             }
@@ -184,53 +180,6 @@ namespace Projet_320_Stone_Sling
             if (value < min) return min;
             if (value > max) return max;
             return value;
-        }
-
-        /// <summary>
-        /// Méthode pour afficher l'écran de fin de jeu
-        /// </summary>
-        /// <param name="winner"></param>
-        static void GameOver(Player winner)
-        {
-            Console.Clear();
-            string gameOverText = "GAME OVER";
-            string winnerText = $"Le joueur {winner.Number} a gagné!";
-            string scoreTextP1 = $"Score du joueur 1: {player1.Score}";
-            string scoreTextP2 = $"Score du joueur 2: {player2.Score}";
-
-            // Positionner le texte "GAME OVER" au centre de l'écran
-            int centerX = (Console.WindowWidth - gameOverText.Length) / 2;
-            int centerY = Console.WindowHeight / 2;
-
-            Console.SetCursorPosition(centerX, centerY);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(gameOverText);
-
-            // Positionner le texte du gagnant en dessous
-            int winnerTextX = (Console.WindowWidth - winnerText.Length) / 2;
-            int winnerTextY = centerY + 2;
-
-            Console.SetCursorPosition(winnerTextX, winnerTextY);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(winnerText);
-
-            // Positionner les scores des joueurs en dessous
-            int scoreTextP1X = (Console.WindowWidth - scoreTextP1.Length) / 2;
-            int scoreTextP1Y = winnerTextY + 2;
-
-            Console.SetCursorPosition(scoreTextP1X, scoreTextP1Y);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write(scoreTextP1);
-
-            int scoreTextP2X = (Console.WindowWidth - scoreTextP2.Length) / 2;
-            int scoreTextP2Y = scoreTextP1Y + 1;
-
-            Console.SetCursorPosition(scoreTextP2X, scoreTextP2Y);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(scoreTextP2);
-
-            Console.ResetColor();
-            Console.SetCursorPosition(0, Console.WindowHeight - 1);
         }
     }
 }
